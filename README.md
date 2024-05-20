@@ -8,6 +8,12 @@ To get started, fork the repository and add your AWS and Docker credentials to t
 
 Also create a AWS EC2 pair key called `vockey.pem` and move it to the `terraform/Kafka` folder.
 
+This project uses docker to containerize the Quarkus microservices, so login into your docker account with the command:
+
+    docker login
+
+Or use the `Docker Desktop` application in your operational system
+
 Then run the following command to provision the AWS resources:
 
     source ./scripts/DeploymentAutomation-ubuntu.sh
