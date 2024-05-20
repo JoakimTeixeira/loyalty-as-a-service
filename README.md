@@ -4,24 +4,26 @@ System to manage loyalty programs for supermarkets
 
 ## Running the Project
 
-To get started, fork the repository and add your AWS and Docker credentials to the environment variables in the `access.sh` file.
+To get started:
 
-Also create a AWS EC2 pair key called `vockey.pem` and move it to the `terraform/Kafka` folder.
+1.  Fork the repository and add your AWS and Docker credentials to the environment variables in the `access.sh` file.
 
-This project uses docker to containerize the Quarkus microservices, so login into your docker account with the command:
+2.  Create a AWS EC2 pair key called `vockey.pem` and move it to the `terraform/Kafka` folder.
 
-    docker login
+3.  This project uses docker to containerize the Quarkus microservices, so login into your docker account with the command:
 
-Or use the `Docker Desktop` application in your operational system
+          docker login
 
-Then run the following command to provision the AWS resources:
+    Or use the `Docker Desktop` application in your operational system
 
-    source ./scripts/DeploymentAutomation-ubuntu.sh
+4.  Then run the following command to provision the AWS resources:
 
-To destroy all resources, run he command:
+          source ./scripts/DeploymentAutomation-ubuntu.sh
 
-    source ./scripts/UndeploymentAutomation.sh
+    To destroy all resources, run he command:
 
-If you want to remove all your credentials from the project, run the command:
+          source ./scripts/UndeploymentAutomation.sh
 
-    source ./scripts/clean-all-projects.sh
+    If you want to remove all your credentials from the project, run the command:
+
+          source ./scripts/clean-all-projects.sh
