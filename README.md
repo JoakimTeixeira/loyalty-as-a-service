@@ -8,12 +8,12 @@ To get started, fork the repository and add your AWS and Docker credentials to t
 
 Then run the following command to provision the AWS resources:
 
-    source ./DeploymentAutomation-ubuntu.sh
+    source ./scripts/DeploymentAutomation-ubuntu.sh
 
 To destroy all resources, run he command:
 
-    source ./UndeploymentAutomation.sh
+    source ./scripts/UndeploymentAutomation.sh
 
 If you want to remove all your credentials from the project, run the command:
 
-    source ./clean-all-projects.sh
+    source ./scripts/clean-all-projects.sh
