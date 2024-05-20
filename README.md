@@ -6,6 +6,8 @@ System to manage loyalty programs for supermarkets
 
 To get started, fork the repository and add your AWS and Docker credentials to the environment variables in the `access.sh` file.
 
+Also create a AWS EC2 pair key called `vockey.pem` and move it to the `terraform/Kafka` folder.
+
 Then run the following command to provision the AWS resources:
 
     source ./scripts/DeploymentAutomation-ubuntu.sh
