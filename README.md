@@ -27,3 +27,11 @@ To get started:
     If you want to remove all your credentials from the project, run the command:
 
           source ./scripts/clean-all-projects.sh
+
+
+## To-do
+- [ ] Automate AWS key pair provisioning
+- [ ] Create new microservices
+- [ ] Model BPMN diagrams for new microservices
+- [ ] Connect microservices using Kong API Gateway
+- [ ] Implement Postman scripts for Kong endpoints 
