@@ -34,4 +34,5 @@ To get started:
 - [ ] Create new microservices
 - [ ] Model BPMN diagrams for new microservices
 - [ ] Connect microservices using Kong API Gateway
-- [ ] Implement Postman scripts for Kong endpoints 
+- [ ] Implement Postman scripts for Kong endpoints
+- [ ] Model the architecture of the application infrastructure
