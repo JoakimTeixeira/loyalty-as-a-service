@@ -4,7 +4,7 @@ echo "Starting..."
 cd
 
 # Install Java
-sudo yum -y install java-1.8.0-openjdk.x86_64 
+sudo yum -y install java-1.8.0-openjdk.x86_64
 
 # Installs Zookeeper
 sudo wget https://dlcdn.apache.org/zookeeper/zookeeper-3.8.4/apache-zookeeper-3.8.4-bin.tar.gz
@@ -18,9 +18,9 @@ dataDir=/var/lib/zookeeper
 clientPort=2181
 maxClientCnxns=60
 initLimit=10
-syncLimit=5" > /usr/local/zookeeper/conf/zoo.cfg 
+syncLimit=5" >/usr/local/zookeeper/conf/zoo.cfg
 
-echo ${idBroker} > /var/lib/zookeeper/myid
+echo ${idBroker} >/var/lib/zookeeper/myid
 
 # Starts Zookeeper
 # # needs to be started before Kafka
@@ -37,7 +37,7 @@ sudo mkdir /tmp/kafka-logs
 sudo /usr/local/kafka/bin/kafka-server-start.sh -daemon /usr/local/kafka/config/server.properties
 
 # Configures Kafka
-ip=`curl http://169.254.169.254/latest/meta-data/public-hostname`
+ip=$(curl http://169.254.169.254/latest/meta-data/public-hostname)
 # Searches and replaces comment occurrences (/g) of "#listeners=PLAINTEXT://:9092" with "listeners=PLAINTEXT://$ip:9092" (gets the "ip" above)
 sudo sed -i "s/#listeners=PLAINTEXT:\/\/:9092/listeners=PLAINTEXT:\/\/$ip:9092/g" /usr/local/kafka/config/server.properties
 
@@ -48,4 +48,3 @@ sudo sed -i "s/transaction.state.log.replication.factor=1/transaction.state.log.
 sudo sed -i "s/transaction.state.log.min.isr=1/transaction.state.log.min.isr=${totalBrokers}/g" /usr/local/kafka/config/server.properties
 
 echo "Finished."
-

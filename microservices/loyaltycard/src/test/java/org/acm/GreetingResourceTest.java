@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class GreetingResourceTest {
     @Test
     void testHelloEndpoint() {
-       
+
     }
 
 }

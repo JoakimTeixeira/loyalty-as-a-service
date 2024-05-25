@@ -28,8 +28,8 @@ To get started:
 
           source ./scripts/clean-all-projects.sh
 
-
 ## To-do
+
 - [ ] Automate AWS key pair provisioning
 - [ ] Create new microservices
 - [ ] Model BPMN diagrams for new microservices

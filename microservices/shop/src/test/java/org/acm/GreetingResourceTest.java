@@ -10,7 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 class GreetingResourceTest {
     @Test
     void testHelloEndpoint() {
-       
+
     }
 
 }

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR=$( cd "$(dirname "${BASH_SOURCE[0]}")")
+BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")")
 cd "$BASE_DIR"
 
 # Remove all credentials from access.sh file

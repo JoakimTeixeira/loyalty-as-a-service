@@ -20,36 +20,38 @@ import io.smallrye.mutiny.Uni;
 @Path("Purchase")
 public class KafkaProvisioningResource {
 
-    
-
     @Inject
     io.vertx.mutiny.mysqlclient.MySQLPool client;
-    
-    @Inject
-    @ConfigProperty(name = "myapp.schema.create", defaultValue = "true") 
-    boolean schemaCreate ;
 
-    @ConfigProperty(name = "kafka.bootstrap.servers") 
+    @Inject
+    @ConfigProperty(name = "myapp.schema.create", defaultValue = "true")
+    boolean schemaCreate;
+
+    @ConfigProperty(name = "kafka.bootstrap.servers")
     String kafka_servers;
-    
+
     void config(@Observes StartupEvent ev) {
         if (schemaCreate) {
             initdb();
         }
     }
-    
+
     private void initdb() {
         // In a production environment this configuration SHOULD NOT be used
         client.query("DROP TABLE IF EXISTS Purchases").execute()
-        .flatMap(r -> client.query("CREATE TABLE Purchases (id SERIAL PRIMARY KEY,DateTime DATETIME, Price FLOAT, Product TEXT NOT NULL, Supplier TEXT NOT NULL, shopname TEXT NOT NULL, loyaltycardid BIGINT UNSIGNED)").execute())
-        .flatMap(r -> client.query("INSERT INTO Purchases (DateTime,Price,Product,Supplier,shopname,loyaltycardid) VALUES ('2038-01-19 03:14:07','12.34','one product','supplier','arco cego',1)").execute())
-        .await().indefinitely();
+                .flatMap(r -> client.query(
+                        "CREATE TABLE Purchases (id SERIAL PRIMARY KEY,DateTime DATETIME, Price FLOAT, Product TEXT NOT NULL, Supplier TEXT NOT NULL, shopname TEXT NOT NULL, loyaltycardid BIGINT UNSIGNED)")
+                        .execute())
+                .flatMap(r -> client.query(
+                        "INSERT INTO Purchases (DateTime,Price,Product,Supplier,shopname,loyaltycardid) VALUES ('2038-01-19 03:14:07','12.34','one product','supplier','arco cego',1)")
+                        .execute())
+                .await().indefinitely();
     }
 
     @POST
     @Path("Consume")
     public String ProvisioningConsumer(Topic topic) {
-        Thread worker = new DynamicTopicConsumer(topic.TopicName , kafka_servers , client);
+        Thread worker = new DynamicTopicConsumer(topic.TopicName, kafka_servers, client);
         worker.start();
         return "New worker started";
     }
@@ -63,10 +65,10 @@ public class KafkaProvisioningResource {
     @Path("{id}")
     public Uni<Response> getSingle(Long id) {
         return Purchase.findById(client, id)
-                .onItem().transform(purchase -> purchase != null ? Response.ok(purchase) : Response.status(Response.Status.NOT_FOUND)) 
-                .onItem().transform(ResponseBuilder::build); 
+                .onItem()
+                .transform(purchase -> purchase != null ? Response.ok(purchase)
+                        : Response.status(Response.Status.NOT_FOUND))
+                .onItem().transform(ResponseBuilder::build);
     }
 
 }
-
-
