@@ -1,0 +1,40 @@
+{
+  // List of extensions which should be recommended for users of this workspace.
+  "recommendations": [
+    // Formatting
+    "esbenp.prettier-vscode",
+    "redhat.java",
+    "redhat.vscode-xml",
+    "hashicorp.terraform",
+    "foxundermoon.shell-format",
+
+    // Spell Checker
+    "streetsidesoftware.code-spell-checker",
+
+    // Linter
+    "SonarSource.sonarlint-vscode",
+
+    // Java Development
+    "vscjava.vscode-java-pack",
+    "redhat.fabric8-analytics",
+    "redhat.vscode-xml",
+
+    // Quarkus
+    "redhat.vscode-quarkus",
+
+    // Terraform
+    "hashicorp.terraform",
+
+    // Docker
+    "ms-azuretools.vscode-docker",
+
+    // Autocomplete support
+    "VisualStudioExptTeam.vscodeintellicode",
+    "christian-kohler.path-intellisense",
+    "Zignd.html-css-class-completion",
+    "naumovs.color-highlight",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "Atishay-Jain.All-Autocomplete"
+  ]
+}
