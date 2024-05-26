@@ -11,5 +11,5 @@ variable "dockerhub_password" {
 variable "security_group_name" {
   description = "The name of the security group"
   type        = string
-  default     = "terraform-Quarkus-instance8"
+  default     = "terraform-quarkus-purchase"
 }

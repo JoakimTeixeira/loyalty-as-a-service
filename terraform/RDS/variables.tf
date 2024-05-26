@@ -21,5 +21,5 @@ variable "db_name" {
 variable "security_group_name" {
   description = "The name of the security group"
   type        = string
-  default     = "terraform-rds-instance2"
+  default     = "terraform-rds-database"
 }

@@ -16,7 +16,7 @@ resource "aws_instance" "shopQuarkus" {
   user_data_replace_on_change = true
 
   tags = {
-    Name = "terraform-deploy-QuarkusProject-shop"
+    Name = "Quarkus-shop"
   }
 }
 

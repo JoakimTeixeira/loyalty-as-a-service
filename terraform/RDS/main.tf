@@ -1,5 +1,5 @@
 resource "aws_db_instance" "rds_db" {
-  identifier_prefix      = "terraform-up-and-running"
+  identifier_prefix      = "rds-database"
   engine                 = "mysql"
   allocated_storage      = 20
   instance_class         = "db.t3.micro"
