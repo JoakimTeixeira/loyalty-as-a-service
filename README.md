@@ -34,10 +34,13 @@ To get started:
 
 ## To-do
 
-- [ ] Automate AWS key pair provisioning
 - [ ] Create new microservices
 - [ ] Model BPMN diagrams for new microservices
+- [ ] Write new Postman scripts to automate E2E tests for BPMN diagrams
 - [ ] Connect microservices using Kong API Gateway
 - [ ] Implement Postman scripts for Kong endpoints
+- [ ] Fix Deploy script to handle multiple Kafka instances
+- [ ] Automate AWS key pair provisioning
+- [ ] Develop a script to update Zookeeper and Kafka configuration files when instance reboots
+- [ ] Configure remote status backend (AWS S3) for backing up Terraform state files
 - [ ] Model the architecture of the application infrastructure
-- [ ] Configure remote status backend (AWS S3) for the Terraform configuration files
