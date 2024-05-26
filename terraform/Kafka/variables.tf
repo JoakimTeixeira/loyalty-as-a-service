@@ -1,7 +1,7 @@
 variable "nBroker" {
   description = "Number of Kafka brokers in the cluster"
   type        = number
-  default     = 2
+  default     = 1
 }
 
 variable "security_group_name" {
