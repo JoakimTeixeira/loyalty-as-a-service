@@ -9,7 +9,7 @@ source ./scripts/access.sh
 
 # Terraform 1 - RDS
 cd terraform/RDS
-terraform init -migrate-state
+terraform init
 terraform apply -auto-approve
 esc=$'\e'
 export addressRDS="$(terraform state show aws_db_instance.rds_db | grep address | sed "s/address//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
