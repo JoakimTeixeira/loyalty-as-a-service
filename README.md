@@ -28,6 +28,10 @@ To get started:
 
           source ./scripts/clean-all-projects.sh
 
+5.  Camunda is responsible for orchestrating the business logic of the application. To deploy the Camunda BPMN files, open the Camunda Modeler program and enter this URL as the deployment URL:
+
+            http://<CAMUNDA-AWS-EC2-PUBLIC-DNS>:8080/engine-rest/deployment/create
+
 ## To-do
 
 - [ ] Automate AWS key pair provisioning
