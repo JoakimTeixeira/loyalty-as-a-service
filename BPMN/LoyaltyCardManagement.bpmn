@@ -293,12 +293,12 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="payload">{
-  "idCustomer": "${CustomerID}",
+  "customerId": "${CustomerID}",
   "id": 0,
-  "idShop": "${ShopID}"
+  "shopId": "${ShopID}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-34-234-77-40.compute-1.amazonaws.com:8080/Loyaltycard</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-34-234-77-40.compute-1.amazonaws.com:8080/LoyaltyCard</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
@@ -348,7 +348,7 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-34-234-77-40.compute-1.amazonaws.com:8080/Loyaltycard/${CustomerID}/${ShopID}</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-34-234-77-40.compute-1.amazonaws.com:8080/LoyaltyCard/${CustomerID}/${ShopID}</camunda:inputParameter>
             <camunda:outputParameter name="LoyaltyCardID">
               <camunda:script scriptFormat="JavaScript">S(connector.getVariable("response")).jsonPath("id").numberValue();</camunda:script>
             </camunda:outputParameter>

@@ -30,21 +30,21 @@ public class CustomerResource {
 
         private void initdb() {
                 // In a production environment this configuration SHOULD NOT be used
-                client.query("DROP TABLE IF EXISTS Customers").execute()
+                client.query("DROP TABLE IF EXISTS customers").execute()
                                 .flatMap(r -> client.query(
-                                                "CREATE TABLE Customers (id SERIAL PRIMARY KEY, name TEXT NOT NULL, FiscalNumber BIGINT UNSIGNED, location TEXT NOT NULL)")
+                                                "CREATE TABLE customers (id SERIAL PRIMARY KEY, name TEXT NOT NULL, FiscalNumber BIGINT UNSIGNED, location TEXT NOT NULL)")
                                                 .execute())
                                 .flatMap(r -> client.query(
-                                                "INSERT INTO Customers (name,FiscalNumber,location) VALUES ('client1','123456','Lisbon')")
+                                                "INSERT INTO customers (name,FiscalNumber,location) VALUES ('client1','123456','Lisbon')")
                                                 .execute())
                                 .flatMap(r -> client.query(
-                                                "INSERT INTO Customers (name,FiscalNumber,location) VALUES ('client2','987654','Setúbal')")
+                                                "INSERT INTO customers (name,FiscalNumber,location) VALUES ('client2','987654','Setúbal')")
                                                 .execute())
                                 .flatMap(r -> client.query(
-                                                "INSERT INTO Customers (name,FiscalNumber,location) VALUES ('client3','123987','OPorto')")
+                                                "INSERT INTO customers (name,FiscalNumber,location) VALUES ('client3','123987','OPorto')")
                                                 .execute())
                                 .flatMap(r -> client
-                                                .query("INSERT INTO Customers (name,FiscalNumber,location) VALUES ('client4','987123','Faro')")
+                                                .query("INSERT INTO customers (name,FiscalNumber,location) VALUES ('client4','987123','Faro')")
                                                 .execute())
                                 .await().indefinitely();
         }

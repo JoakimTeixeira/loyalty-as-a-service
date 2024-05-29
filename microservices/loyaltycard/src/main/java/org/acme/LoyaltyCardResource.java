@@ -12,7 +12,7 @@ import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.ResponseBuilder;
 import jakarta.ws.rs.core.MediaType;
 
-@Path("Loyaltycard")
+@Path("LoyaltyCard")
 public class LoyaltyCardResource {
 
     @Inject
@@ -30,14 +30,14 @@ public class LoyaltyCardResource {
 
     private void initdb() {
         // In a production environment this configuration SHOULD NOT be used
-        client.query("DROP TABLE IF EXISTS LoyaltyCards").execute()
+        client.query("DROP TABLE IF EXISTS loyaltyCards").execute()
                 .flatMap(r -> client.query(
-                        "CREATE TABLE LoyaltyCards (id SERIAL PRIMARY KEY, idCustomer BIGINT UNSIGNED, idShop BIGINT UNSIGNED, CONSTRAINT UC_Loyal UNIQUE (idCustomer,idShop))")
+                        "CREATE TABLE loyaltyCards (id SERIAL PRIMARY KEY, customerId BIGINT UNSIGNED, shopId BIGINT UNSIGNED, CONSTRAINT UC_Loyal UNIQUE (customerId,shopId))")
                         .execute())
-                .flatMap(r -> client.query(" INSERT INTO LoyaltyCards (idCustomer,idShop) VALUES (1,1)").execute())
-                .flatMap(r -> client.query(" INSERT INTO LoyaltyCards (idCustomer,idShop) VALUES (2,1)").execute())
-                .flatMap(r -> client.query(" INSERT INTO LoyaltyCards (idCustomer,idShop) VALUES (1,3)").execute())
-                .flatMap(r -> client.query(" INSERT INTO LoyaltyCards (idCustomer,idShop) VALUES (4,2)").execute())
+                .flatMap(r -> client.query(" INSERT INTO loyaltyCards (customerId,shopId) VALUES (1,1)").execute())
+                .flatMap(r -> client.query(" INSERT INTO loyaltyCards (customerId,shopId) VALUES (2,1)").execute())
+                .flatMap(r -> client.query(" INSERT INTO loyaltyCards (customerId,shopId) VALUES (1,3)").execute())
+                .flatMap(r -> client.query(" INSERT INTO loyaltyCards (customerId,shopId) VALUES (4,2)").execute())
                 .await().indefinitely();
     }
 
@@ -57,9 +57,9 @@ public class LoyaltyCardResource {
     }
 
     @GET
-    @Path("{idCustomer}/{idShop}")
-    public Uni<Response> getDual(Long idCustomer, Long idShop) {
-        return LoyaltyCard.findById2(client, idCustomer, idShop)
+    @Path("{customerId}/{shopId}")
+    public Uni<Response> getDual(Long customerId, Long shopId) {
+        return LoyaltyCard.findById2(client, customerId, shopId)
                 .onItem()
                 .transform(loyaltycard -> loyaltycard != null ? Response.ok(loyaltycard)
                         : Response.status(Response.Status.NOT_FOUND))
@@ -68,7 +68,7 @@ public class LoyaltyCardResource {
 
     @POST
     public Uni<Response> create(LoyaltyCard loyaltycard) {
-        return loyaltycard.save(client, loyaltycard.idCustomer, loyaltycard.idShop)
+        return loyaltycard.save(client, loyaltycard.customerId, loyaltycard.shopId)
                 .onItem().transform(id -> URI.create("/loyaltycard/" + id))
                 .onItem().transform(uri -> Response.created(uri).build());
     }
@@ -82,9 +82,9 @@ public class LoyaltyCardResource {
     }
 
     @PUT
-    @Path("/{id}/{idCustomer}/{idShop}")
-    public Uni<Response> update(Long id, Long idCustomer, Long idShop) {
-        return LoyaltyCard.update(client, id, idCustomer, idShop)
+    @Path("/{id}/{customerId}/{shopId}")
+    public Uni<Response> update(Long id, Long customerId, Long shopId) {
+        return LoyaltyCard.update(client, id, customerId, shopId)
                 .onItem().transform(updated -> updated ? Response.Status.NO_CONTENT : Response.Status.NOT_FOUND)
                 .onItem().transform(status -> Response.status(status).build());
     }

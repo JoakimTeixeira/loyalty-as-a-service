@@ -38,12 +38,12 @@ public class KafkaProvisioningResource {
 
     private void initdb() {
         // In a production environment this configuration SHOULD NOT be used
-        client.query("DROP TABLE IF EXISTS Purchases").execute()
+        client.query("DROP TABLE IF EXISTS purchases").execute()
                 .flatMap(r -> client.query(
-                        "CREATE TABLE Purchases (id SERIAL PRIMARY KEY,DateTime DATETIME, Price FLOAT, Product TEXT NOT NULL, Supplier TEXT NOT NULL, shopname TEXT NOT NULL, loyaltycardid BIGINT UNSIGNED)")
+                        "CREATE TABLE purchases (id SERIAL PRIMARY KEY,dateTime DATETIME, price FLOAT, product TEXT NOT NULL, supplier TEXT NOT NULL, shopName TEXT NOT NULL, loyaltyCardId BIGINT UNSIGNED)")
                         .execute())
                 .flatMap(r -> client.query(
-                        "INSERT INTO Purchases (DateTime,Price,Product,Supplier,shopname,loyaltycardid) VALUES ('2038-01-19 03:14:07','12.34','one product','supplier','arco cego',1)")
+                        "INSERT INTO purchases (dateTime,price,product,supplier,shopName,loyaltyCardId) VALUES ('2038-01-19 03:14:07','12.34','one product','supplier','arco cego',1)")
                         .execute())
                 .await().indefinitely();
     }

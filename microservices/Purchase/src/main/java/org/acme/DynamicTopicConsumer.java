@@ -48,20 +48,20 @@ public class DynamicTopicConsumer extends Thread {
 
                         String jsonString = record.value();
                         JSONObject obj = new JSONObject(jsonString);
-                        String timestamp = obj.getJSONObject("Purchase_Event").getString("TimeStamp");
-                        String price = obj.getJSONObject("Purchase_Event").getString("Price");
-                        String product = obj.getJSONObject("Purchase_Event").getString("Product");
-                        String supplier = obj.getJSONObject("Purchase_Event").getString("Supplier");
-                        String shop_name = obj.getJSONObject("Purchase_Event").getString("Shop");
-                        String loyaltyCard_id = obj.getJSONObject("Purchase_Event").getString("LoyaltyCard_ID");
+                        String dateTime = obj.getJSONObject("Purchase_Event").getString("dateTime");
+                        String price = obj.getJSONObject("Purchase_Event").getString("price");
+                        String product = obj.getJSONObject("Purchase_Event").getString("product");
+                        String supplier = obj.getJSONObject("Purchase_Event").getString("supplier");
+                        String shopName = obj.getJSONObject("Purchase_Event").getString("shop");
+                        String loyaltyCardId = obj.getJSONObject("Purchase_Event").getString("loyaltyCardId");
 
-                        String query = "INSERT INTO Purchases (DateTime,Price,Product,Supplier,shopname,loyaltycardid) VALUES ("
-                                + "'" + timestamp + "',"
+                        String query = "INSERT INTO purchases (dateTime,price,product,supplier,shopName,loyaltyCardId) VALUES ("
+                                + "'" + dateTime + "',"
                                 + "'" + price + "',"
                                 + "'" + product + "',"
                                 + "'" + supplier + "',"
-                                + "'" + shop_name + "',"
-                                + loyaltyCard_id
+                                + "'" + shopName + "',"
+                                + loyaltyCardId
                                 + ")";
 
                         client.query(query).execute().await().indefinitely();

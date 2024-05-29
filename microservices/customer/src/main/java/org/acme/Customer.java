@@ -45,31 +45,31 @@ public class Customer {
 	}
 
 	public static Multi<Customer> findAll(MySQLPool client) {
-		return client.query("SELECT id, name, FiscalNumber , location FROM Customers ORDER BY id ASC").execute()
+		return client.query("SELECT id, name, FiscalNumber , location FROM customers ORDER BY id ASC").execute()
 				.onItem().transformToMulti(set -> Multi.createFrom().iterable(set))
 				.onItem().transform(Customer::from);
 	}
 
 	public static Uni<Customer> findById(MySQLPool client, Long id) {
-		return client.preparedQuery("SELECT id, name, FiscalNumber , location FROM Customers WHERE id = ?")
+		return client.preparedQuery("SELECT id, name, FiscalNumber , location FROM customers WHERE id = ?")
 				.execute(Tuple.of(id))
 				.onItem().transform(RowSet::iterator)
 				.onItem().transform(iterator -> iterator.hasNext() ? from(iterator.next()) : null);
 	}
 
 	public Uni<Boolean> save(MySQLPool client, String name_R, Long fnumber, String loc) {
-		return client.preparedQuery("INSERT INTO Customers(name,FiscalNumber,location) VALUES (?,?,?)")
+		return client.preparedQuery("INSERT INTO customers(name,FiscalNumber,location) VALUES (?,?,?)")
 				.execute(Tuple.of(name_R, fnumber, loc))
 				.onItem().transform(pgRowSet -> pgRowSet.rowCount() == 1);
 	}
 
 	public static Uni<Boolean> delete(MySQLPool client, Long id_R) {
-		return client.preparedQuery("DELETE FROM Customers WHERE id = ?").execute(Tuple.of(id_R))
+		return client.preparedQuery("DELETE FROM customers WHERE id = ?").execute(Tuple.of(id_R))
 				.onItem().transform(pgRowSet -> pgRowSet.rowCount() == 1);
 	}
 
 	public static Uni<Boolean> update(MySQLPool client, Long id_R, String name_R, Long fnumber, String loc) {
-		return client.preparedQuery("UPDATE Customers SET name = ?, FiscalNumber = ? , location = ? WHERE id = ?")
+		return client.preparedQuery("UPDATE customers SET name = ?, FiscalNumber = ? , location = ? WHERE id = ?")
 				.execute(Tuple.of(name_R, fnumber, loc, id_R))
 				.onItem().transform(pgRowSet -> pgRowSet.rowCount() == 1);
 	}
