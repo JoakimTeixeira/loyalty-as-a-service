@@ -7,16 +7,16 @@ import io.vertx.mutiny.sqlclient.Row;
 import io.vertx.mutiny.sqlclient.RowSet;
 import io.vertx.mutiny.sqlclient.Tuple;
 
-public class Loyaltycard {
+public class LoyaltyCard {
 
 	public Long id;
 	public Long idCustomer;
 	public Long idShop;
 
-	public Loyaltycard() {
+	public LoyaltyCard() {
 	}
 
-	public Loyaltycard(Long id, Long idCustomer, Long idShop) {
+	public LoyaltyCard(Long id, Long idCustomer, Long idShop) {
 		this.id = id;
 		this.idCustomer = idCustomer;
 		this.idShop = idShop;
@@ -27,24 +27,24 @@ public class Loyaltycard {
 		return "{id:" + id + ", idCustomer:" + idCustomer + ", idShop:" + idShop + "}\n";
 	}
 
-	private static Loyaltycard from(Row row) {
-		return new Loyaltycard(row.getLong("id"), row.getLong("idCustomer"), row.getLong("idShop"));
+	private static LoyaltyCard from(Row row) {
+		return new LoyaltyCard(row.getLong("id"), row.getLong("idCustomer"), row.getLong("idShop"));
 	}
 
-	public static Multi<Loyaltycard> findAll(MySQLPool client) {
+	public static Multi<LoyaltyCard> findAll(MySQLPool client) {
 		return client.query("SELECT id, idCustomer, idShop  FROM LoyaltyCards ORDER BY id ASC").execute()
 				.onItem().transformToMulti(set -> Multi.createFrom().iterable(set))
-				.onItem().transform(Loyaltycard::from);
+				.onItem().transform(LoyaltyCard::from);
 	}
 
-	public static Uni<Loyaltycard> findById(MySQLPool client, Long id) {
+	public static Uni<LoyaltyCard> findById(MySQLPool client, Long id) {
 		return client.preparedQuery("SELECT id, idCustomer, idShop  FROM LoyaltyCards WHERE id = ?")
 				.execute(Tuple.of(id))
 				.onItem().transform(RowSet::iterator)
 				.onItem().transform(iterator -> iterator.hasNext() ? from(iterator.next()) : null);
 	}
 
-	public static Uni<Loyaltycard> findById2(MySQLPool client, Long idCustomer, Long idShop) {
+	public static Uni<LoyaltyCard> findById2(MySQLPool client, Long idCustomer, Long idShop) {
 		return client
 				.preparedQuery("SELECT id, idCustomer, idShop FROM LoyaltyCards WHERE idCustomer = ? AND idShop = ?")
 				.execute(Tuple.of(idCustomer, idShop))
