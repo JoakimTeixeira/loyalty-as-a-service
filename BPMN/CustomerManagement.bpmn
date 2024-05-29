@@ -230,7 +230,7 @@
     <ns2:startEvent id="Event_261ff510-8687-4be0-9a23-9d6d19eafaf3">
       <ns2:extensionElements>
         <camunda:executionListener event="start">
-          <camunda:script scriptFormat="groovy">       execution.setBusinessKey(UUID.randomUUID().toString())</camunda:script>
+          <camunda:script scriptFormat="groovy">execution.setBusinessKey(UUID.randomUUID().toString())</camunda:script>
         </camunda:executionListener>
       </ns2:extensionElements>
       <ns2:outgoing>Flow_5936b423-bd45-4b26-9b1e-03c32c176bd0</ns2:outgoing>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ns2:definitions xmlns:ns2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns3="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns4="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns5="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+<ns2:definitions xmlns:ns2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:ns3="http://www.omg.org/spec/DD/20100524/DI" xmlns:ns4="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:ns5="http://www.omg.org/spec/DD/20100524/DC" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:modeler="http://camunda.org/schema/modeler/1.0" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.17.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
   <ns2:collaboration id="coll-DEMO2BPMN">
     <ns2:participant id="Participant_35abdb70-ab23-431b-aaae-244b9137cf46" name="BUSINESS ACTOR 1" processRef="BusinessActor1LoyaltyCardManagement" />
     <ns2:participant id="Participant_76df3ca7-833d-4742-b903-00df33f6cedf" name="BUSINESS ACTOR 2" processRef="BusinessActor2LoyaltyCardManagement" />
@@ -51,6 +51,11 @@
       <ns2:incoming>Flow_06xvblc</ns2:incoming>
     </ns2:endEvent>
     <ns2:startEvent id="Event_b8248933-61ca-4a55-bd96-cfa3bbaec281">
+      <ns2:extensionElements>
+        <camunda:executionListener event="start">
+          <camunda:script scriptFormat="groovy">execution.setBusinessKey(UUID.randomUUID().toString())</camunda:script>
+        </camunda:executionListener>
+      </ns2:extensionElements>
       <ns2:outgoing>Flow_9c314640-5eea-4233-a090-aae2c04ca00c</ns2:outgoing>
     </ns2:startEvent>
     <ns2:userTask id="Activity_9841ec7e-705e-4a46-9924-61aed9dc6c00" name="Decide the data to LoyaltyCard association order" camunda:assignee="demo">
@@ -86,11 +91,11 @@
             <camunda:inputParameter name="url">http://localhost:8080/engine-rest/process-definition/key/BusinessActor2LoyaltyCardManagement/start</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="payload">{
-"businessKey":"${businessKey}",
+"businessKey":"${execution.businessKey}",
 "variables": {
 "CustomerID": {"value":"${CustomerID}","type":"string"},
 "ShopID":{"value":"${ShopID}","type":"string"},
-"businessKeyRequester":{"value":"${businessKey}","type":"string"} 
+"businessKeyRequester":{"value":"${execution.businessKey}","type":"string"} 
 } }</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
@@ -110,7 +115,7 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="payload">{
 "messageName" : "Message_3p4hhrm",
-"businessKey" : "${businessKey}",
+"businessKey" : "${execution.businessKey}",
 "resultEnabled" : true
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
@@ -132,7 +137,9 @@
     <ns2:sequenceFlow id="Flow_7594a91a-9fa3-4ec7-b606-0dfbb4d51120" sourceRef="Event_6bab8eb5-3564-45f6-ac75-17753b59a9eb" targetRef="Activity_fc1e6910-1008-4a65-96d6-d47bc7a5c702" />
     <ns2:sequenceFlow id="Flow_1l8l1dz" sourceRef="Activity_fc1e6910-1008-4a65-96d6-d47bc7a5c702" targetRef="Activity_0yx4344" />
     <ns2:sequenceFlow id="Flow_06xvblc" sourceRef="Activity_0yx4344" targetRef="Event_4dd05a0a-2a67-4565-bd13-0c61961afd52" />
-    <ns2:sequenceFlow id="Flow_9c314640-5eea-4233-a090-aae2c04ca00c" sourceRef="Event_b8248933-61ca-4a55-bd96-cfa3bbaec281" targetRef="Activity_8a65cc5c-3044-4a2b-a08e-58c41cc97372" />
+    <ns2:sequenceFlow id="Flow_9c314640-5eea-4233-a090-aae2c04ca00c" sourceRef="Event_b8248933-61ca-4a55-bd96-cfa3bbaec281" targetRef="Activity_8a65cc5c-3044-4a2b-a08e-58c41cc97372">
+      <ns2:extensionElements />
+    </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_0u7csvc" sourceRef="Activity_1fmgg2w" targetRef="Activity_9841ec7e-705e-4a46-9924-61aed9dc6c00" />
     <ns2:sequenceFlow id="Flow_1e067486-d199-45fe-8399-ffa72146c5ed" sourceRef="Activity_9841ec7e-705e-4a46-9924-61aed9dc6c00" targetRef="Activity_0114ffd8-a98c-4bb9-939c-ebe65dd45cea" />
     <ns2:sequenceFlow id="Flow_0mo12qz" sourceRef="Activity_8a65cc5c-3044-4a2b-a08e-58c41cc97372" targetRef="Activity_1fmgg2w" />
