@@ -36,11 +36,11 @@ To get started:
 
 - [ ] Create new microservices
 - [ ] Model BPMN diagrams for new microservices
-- [ ] Write Postman scripts for E2E tests of BPMN diagrams
+- [ ] Implement Postman scripts for E2E tests of BPMN diagrams
 - [ ] Connect microservices via Kong API Gateway
-- [ ] Implement Postman scripts for Kong endpoints
-- [ ] Update deploy script for multiple Kafka instances
+- [ ] Adapt Postman scripts to use Kong endpoints
+- [ ] Update deploy script to leverage multiple Kafka instances
 - [ ] Automate AWS key pairs provisioning
-- [ ] Develop script to update Zookeeper and Kafka configs on reboot
-- [ ] Configure AWS S3 for backing up Terraform state
-- [ ] Model application infrastructure architecture
+- [ ] Develop a script to update Zookeeper and Kafka configs on reboot
+- [ ] Configure terraform state to be backed up in AWS S3
+- [ ] Model architecture diagram for application infrastructure
