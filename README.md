@@ -36,6 +36,7 @@ To get started:
 
 - [ ] Create new microservices
 - [ ] Model BPMN diagrams for new microservices
+- [x] Create Kong scripts to serve as API Gateway for the microservices
 - [ ] Implement Postman scripts for E2E tests of BPMN diagrams
 - [ ] Connect microservices via Kong API Gateway
 - [ ] Adapt Postman scripts to use Kong endpoints
