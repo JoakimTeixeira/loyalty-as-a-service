@@ -36,10 +36,9 @@ To get started:
 
 - [ ] Create new microservices
 - [ ] Model BPMN diagrams for new microservices
-- [x] Create Kong scripts to serve as API Gateway for the microservices
 - [x] Implement Postman scripts for E2E tests of BPMN diagrams
-- [ ] Connect microservices via Kong API Gateway
-- [ ] Adapt Postman scripts to use Kong endpoints
+- [x] Create Kong scripts to serve as API Gateway for the microservices
+- [ ] Adapt BPMN diagrams so that Camunda and microservices communicate through Kong endpoints
 - [ ] Update deploy script to leverage multiple Kafka instances
 - [ ] Automate AWS key pairs provisioning
 - [ ] Develop a script to update Zookeeper and Kafka configs on reboot
