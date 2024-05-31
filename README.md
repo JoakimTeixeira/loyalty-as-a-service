@@ -6,7 +6,7 @@ System to manage loyalty programs for supermarkets
 
 To get started:
 
-1.  Fork the repository and add your AWS and Docker credentials to the environment variables in the `access.sh` file.
+1.  Fork the repository and add your AWS and Docker credentials to the environment variables in the `Access.sh` file.
 
 2.  Create an AWS EC2 pair key called `vockey.pem` and move it to the `terraform/Kafka` folder.
 
@@ -18,15 +18,15 @@ To get started:
 
 4.  Then run the following command to provision the AWS resources:
 
-          source ./scripts/DeploymentAutomation-ubuntu.sh
+          source ./scripts/terraform/DeploymentAutomation-ubuntu.sh
 
     To destroy all resources, run the command:
 
-          source ./scripts/UndeploymentAutomation.sh
+          source ./scripts/terraform/UndeploymentAutomation.sh
 
     If you want to remove all your credentials from the project, run the command:
 
-          source ./scripts/clean-all-projects.sh
+          source ./scripts/auth/CleanAllProjects.sh
 
 5.  Camunda is responsible for orchestrating the business logic of the application. To deploy the Camunda BPMN files, open the Camunda Modeler program and enter this URL as the deployment URL:
 

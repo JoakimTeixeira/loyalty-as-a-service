@@ -3,7 +3,7 @@
 BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")")
 cd "$BASE_DIR"
 
-source ./scripts/access.sh
+source scripts/auth/Access.sh
 
 # Terraform 1 - RDS
 cd terraform/RDS

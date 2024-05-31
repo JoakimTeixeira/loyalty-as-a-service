@@ -1,12 +1,17 @@
 #!/bin/bash
 
-KONG_SERVER_ADDRESS="http://${addressKong}"
+source scripts/terraform/ExportAddresses.sh
+
+echo "Starting Kong services and routes configuration..."
+echo
+
+KONG_SERVER_ADDRESS="http://${pathKong}"
 SHOP_URL="http://${pathShop}:8080/Shop"
 PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
 CUSTOMER_URL="http://${pathCustomer}:8080/Customer"
 LOYALTYCARD_URL="http://${pathLoyaltyCard}:8080/LoyaltyCard"
 
-== SHOP ==
+# == SHOP ==
 
 # Service
 curl -i -X POST \
@@ -19,9 +24,9 @@ curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8001/services/shop-service/routes" \
   --data "hosts[]=servershop.com"
 
-===================================================================
+# ===================================================================
 
-== PURCHASE ==
+# == PURCHASE ==
 
 # Service
 curl -i -X POST \
@@ -34,9 +39,9 @@ curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8001/services/purchase-service/routes" \
   --data "hosts[]=serverpurchase.com"
 
-===================================================================
+# ===================================================================
 
-== CUSTOMER ==
+# == CUSTOMER ==
 
 # Service
 curl -i -X POST \
@@ -49,9 +54,9 @@ curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8001/services/customer-service/routes" \
   --data "hosts[]=servercustomer.com"
 
-===================================================================
+# ===================================================================
 
-== LOYALTY CARD ==
+# == LOYALTY CARD ==
 
 # Service
 curl -i -X POST \

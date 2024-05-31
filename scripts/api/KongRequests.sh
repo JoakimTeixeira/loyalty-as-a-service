@@ -1,6 +1,8 @@
 #!/bin/bash
 
-KONG_SERVER_ADDRESS="http://${addressKong}"
+source scripts/terraform/ExportAddresses.sh
+
+KONG_SERVER_ADDRESS="http://${pathKong}"
 SHOP_URL="http://${pathShop}:8080/Shop"
 PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
 CUSTOMER_URL="http://${pathCustomer}:8080/Customer"

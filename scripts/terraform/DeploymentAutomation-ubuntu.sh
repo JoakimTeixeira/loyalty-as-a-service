@@ -1,9 +1,12 @@
 #!/bin/bash
 
-BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")")
+BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 cd "$BASE_DIR"
 
-source ./scripts/access.sh
+source scripts/auth/Access.sh
+
+echo "Starting deployment..."
+echo
 
 # ================================================================================
 
@@ -12,7 +15,7 @@ cd terraform/RDS
 terraform init
 terraform apply -auto-approve
 esc=$'\e'
-export addressRDS="$(terraform state show aws_db_instance.rds_db | grep address | sed "s/address//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+addressRDS="$(terraform state show aws_db_instance.rds_db | grep address | sed "s/address//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
 cd ../..
 
 # ================================================================================
@@ -23,7 +26,7 @@ terraform init
 terraform apply -auto-approve
 esc=$'\e'
 # addresskafka2=$(terraform state list 'aws_instance.kafkaCluster' | xargs -I {} terraform state show {} | grep public_dns | awk '{print $3}' | tr -d '"' | paste -sd ',' -)
-export addresskafka="$(terraform state show 'aws_instance.kafkaCluster[0]' | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+addresskafka="$(terraform state show 'aws_instance.kafkaCluster[0]' | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
 cd ../..
 
 # ================================================================================
@@ -128,6 +131,7 @@ cd ../../..
 cd terraform/Kong
 terraform init
 terraform apply -auto-approve
+pathKong="$(terraform state show aws_instance.installKong | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
 cd ../..
 
 # ================================================================================
@@ -146,65 +150,17 @@ terraform init
 terraform apply -auto-approve
 cd ../..
 
-# ===================== Showing all the PUBLIC_DNSs =====================
+# ============================= Export PUBLIC_DNSs ===============================
 
-cd terraform/RDS
-echo "RDS IS AVAILABLE HERE:"
-echo "${addressRDS}"
-echo
-cd ../..
+source scripts/terraform/ExportAddresses.sh
 
-cd terraform/Kafka
-echo "KAFKA IS AVAILABLE HERE:"
-echo "${addresskafka}"
-echo
-cd ../..
+# ============================ Setup Kong API Gateway ============================
 
-cd terraform/Quarkus/Purchase
-echo "MICROSERVICE purchase IS AVAILABLE HERE:"
-export pathPurchase="$(terraform state show aws_instance.purchaseQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://${pathPurchase}:8080/q/swagger-ui/"
-echo
-cd ../../..
+source scripts/api/KongConfiguration.sh
 
-cd terraform/Quarkus/customer
-echo "MICROSERVICE customer IS AVAILABLE HERE:"
-export pathCustomer="$(terraform state show aws_instance.customerQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://${pathCustomer}:8080/q/swagger-ui/"
-echo
-cd ../../..
+# ========================== Showing all the PUBLIC_DNSs =========================
 
-cd terraform/Quarkus/shop
-echo "MICROSERVICE shop IS AVAILABLE HERE:"
-export pathShop="$(terraform state show aws_instance.shopQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://${pathShop}:8080/q/swagger-ui/"
-echo
-cd ../../..
+source scripts/terraform/PrintAddresses.sh
 
-cd terraform/Quarkus/loyaltycard
-echo "MICROSERVICE loyaltycard IS AVAILABLE HERE:"
-export pathLoyaltyCard="$(terraform state show aws_instance.loyaltyCardQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://${pathLoyaltyCard}:8080/q/swagger-ui/"
+echo "Finished deployment."
 echo
-cd ../../..
-
-cd terraform/Kong
-echo "KONG IS AVAILABLE HERE:"
-export addressKong="$(terraform state show aws_instance.installKong | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://${addressKong}:8001/"
-echo
-cd ../..
-
-cd terraform/Konga
-echo "KONGA IS AVAILABLE HERE:"
-addressKonga="$(terraform state show aws_instance.installKonga | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://${addressKonga}:1337/"
-echo
-cd ../..
-
-cd terraform/Camunda
-echo "CAMUNDA IS AVAILABLE HERE:"
-addressCamunda="$(terraform state show aws_instance.installCamundaEngine | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://${addressCamunda}:8080/camunda"
-echo
-cd ../..

@@ -3,12 +3,15 @@
 BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")")
 cd "$BASE_DIR"
 
+echo "Cleaning all projects..."
+echo
+
 # Remove all credentials from access.sh file
-sed -i 's/^aws_access_key_id=.*/aws_access_key_id='""'/' scripts/access.sh
-sed -i 's/^aws_secret_access_key=.*/aws_secret_access_key='""'/' scripts/access.sh
-sed -i 's/^aws_session_token=.*/aws_session_token='""'/' scripts/access.sh
-sed -i 's/^export TF_VAR_dockerhub_password=.*/export TF_VAR_dockerhub_password='""'/' scripts/access.sh
-sed -i 's/^export TF_VAR_dockerhub_username=.*/export TF_VAR_dockerhub_username='""'/' scripts/access.sh
+sed -i 's/^aws_access_key_id=.*/aws_access_key_id='""'/' scripts/auth/access.sh
+sed -i 's/^aws_secret_access_key=.*/aws_secret_access_key='""'/' scripts/auth/access.sh
+sed -i 's/^aws_session_token=.*/aws_session_token='""'/' scripts/auth/access.sh
+sed -i 's/^export TF_VAR_dockerhub_password=.*/export TF_VAR_dockerhub_password='""'/' scripts/auth/access.sh
+sed -i 's/^export TF_VAR_dockerhub_username=.*/export TF_VAR_dockerhub_username='""'/' scripts/auth/access.sh
 
 # Remove all credentials from microservices' configuration files
 cd microservices/customer/src/main/resources
@@ -40,3 +43,6 @@ find . \( -name ".terraform" -o -name ".terraform.lock.hcl" -o -name ".terraform
 
 # Remove all compilation files from microservices
 find . \( -name "target" \) -type d -exec rm -rf {} +
+
+echo "All projects were cleaned!"
+echo
