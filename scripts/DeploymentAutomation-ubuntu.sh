@@ -150,61 +150,61 @@ cd ../..
 
 cd terraform/RDS
 echo "RDS IS AVAILABLE HERE:"
-echo ""$addressRDS""
+echo "${addressRDS}"
 echo
 cd ../..
 
 cd terraform/Kafka
 echo "KAFKA IS AVAILABLE HERE:"
-echo ""$addresskafka""
+echo "${addresskafka}"
 echo
 cd ../..
 
 cd terraform/Quarkus/Purchase
 echo "MICROSERVICE purchase IS AVAILABLE HERE:"
-pathPurchase="$(terraform state show aws_instance.purchaseQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://"$pathPurchase":8080/q/swagger-ui/"
+export pathPurchase="$(terraform state show aws_instance.purchaseQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+echo "http://${pathPurchase}:8080/q/swagger-ui/"
 echo
 cd ../../..
 
 cd terraform/Quarkus/customer
 echo "MICROSERVICE customer IS AVAILABLE HERE:"
-pathCustomer="$(terraform state show aws_instance.customerQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://"$pathCustomer":8080/q/swagger-ui/"
+export pathCustomer="$(terraform state show aws_instance.customerQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+echo "http://${pathCustomer}:8080/q/swagger-ui/"
 echo
 cd ../../..
 
 cd terraform/Quarkus/shop
 echo "MICROSERVICE shop IS AVAILABLE HERE:"
-pathShop="$(terraform state show aws_instance.shopQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://"$pathShop":8080/q/swagger-ui/"
+export pathShop="$(terraform state show aws_instance.shopQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+echo "http://${pathShop}:8080/q/swagger-ui/"
 echo
 cd ../../..
 
 cd terraform/Quarkus/loyaltycard
 echo "MICROSERVICE loyaltycard IS AVAILABLE HERE:"
-pathLoyaltyCard="$(terraform state show aws_instance.loyaltyCardQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://"$pathLoyaltyCard":8080/q/swagger-ui/"
+export pathLoyaltyCard="$(terraform state show aws_instance.loyaltyCardQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+echo "http://${pathLoyaltyCard}:8080/q/swagger-ui/"
 echo
 cd ../../..
 
 cd terraform/Kong
 echo "KONG IS AVAILABLE HERE:"
-addressKong="$(terraform state show aws_instance.installKong | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://"$addressKong":8080/"
+export addressKong="$(terraform state show aws_instance.installKong | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+echo "http://${addressKong}:8001/"
 echo
 cd ../..
 
 cd terraform/Konga
 echo "KONGA IS AVAILABLE HERE:"
 addressKonga="$(terraform state show aws_instance.installKonga | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://"$addressKonga":1337/"
+echo "http://${addressKonga}:1337/"
 echo
 cd ../..
 
 cd terraform/Camunda
 echo "CAMUNDA IS AVAILABLE HERE:"
 addressCamunda="$(terraform state show aws_instance.installCamundaEngine | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-echo "http://"$addressCamunda":8080/camunda"
+echo "http://${addressCamunda}:8080/camunda"
 echo
 cd ../..
