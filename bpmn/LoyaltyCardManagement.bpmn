@@ -73,9 +73,10 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-34-207-111-155.compute-1.amazonaws.com:8080/Customer</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
+                <camunda:entry key="Host">servercustomer.com</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
                 <camunda:entry key="Accept">application/json</camunda:entry>
               </camunda:map>
@@ -131,9 +132,10 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-54-91-227-182.compute-1.amazonaws.com:8080/Shop</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
+                <camunda:entry key="Host">servershop.com</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
                 <camunda:entry key="Accept">application/json</camunda:entry>
               </camunda:map>
@@ -294,9 +296,10 @@
   "shopId": "${ShopID}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-34-234-77-40.compute-1.amazonaws.com:8080/LoyaltyCard</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
+                <camunda:entry key="Host">serverloyaltycard.com</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
                 <camunda:entry key="Accept">application/json</camunda:entry>
               </camunda:map>
@@ -345,9 +348,10 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-34-234-77-40.compute-1.amazonaws.com:8080/LoyaltyCard/${CustomerID}/${ShopID}</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000/${CustomerID}/${ShopID}</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
+                <camunda:entry key="Host">serverloyaltycard.com</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
                 <camunda:entry key="Accept">application/json</camunda:entry>
               </camunda:map>
@@ -368,9 +372,10 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="payload" />
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-54-91-227-182.compute-1.amazonaws.com:8080/Shop/${ShopID}</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000/${ShopID}</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
+                <camunda:entry key="Host">servershop.com</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
                 <camunda:entry key="Accept">application/json</camunda:entry>
               </camunda:map>
@@ -489,9 +494,10 @@
   "topicName": "${LoyaltyCardID}-${ShopName}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-3-88-99-43.compute-1.amazonaws.com:8080/Purchase/Consume</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000/Consume</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
+                <camunda:entry key="Host">serverpurchase.com</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
                 <camunda:entry key="Accept">text/plain</camunda:entry>
               </camunda:map>

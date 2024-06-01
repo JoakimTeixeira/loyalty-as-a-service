@@ -1,15 +1,15 @@
 #!/bin/bash
 
-source scripts/terraform/ExportAddresses.sh
+# Accesses variables exported by ExportAddresses.sh after running DeploymentAutomation-ubuntu.sh
 
 echo "Starting Kong services and routes configuration..."
 echo
 
-KONG_SERVER_ADDRESS="http://${pathKong}"
-SHOP_URL="http://${pathShop}:8080/Shop"
-PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
-CUSTOMER_URL="http://${pathCustomer}:8080/Customer"
-LOYALTYCARD_URL="http://${pathLoyaltyCard}:8080/LoyaltyCard"
+export KONG_SERVER_ADDRESS="http://${pathKong}"
+export SHOP_URL="http://${pathShop}:8080/Shop"
+export PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
+export CUSTOMER_URL="http://${pathCustomer}:8080/Customer"
+export LOYALTYCARD_URL="http://${pathLoyaltyCard}:8080/LoyaltyCard"
 
 # == SHOP ==
 

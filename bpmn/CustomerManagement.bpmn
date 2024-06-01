@@ -410,11 +410,12 @@
 "name": "${Name}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-44-200-79-100.compute-1.amazonaws.com:8080/Customer</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Accept">application/json</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
+                <camunda:entry key="Host">servercustomer.com</camunda:entry>
               </camunda:map>
             </camunda:inputParameter>
           </camunda:inputOutput>

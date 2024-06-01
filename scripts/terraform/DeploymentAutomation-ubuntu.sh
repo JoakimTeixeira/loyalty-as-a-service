@@ -43,9 +43,18 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-cd ../../..
-./mvnw clean package
-cd ../..
+# Builds the Docker image or skips if it already exists in Docker Hub
+if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/purchase/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
+    echo
+    echo "Docker image not found in Docker Hub. Building package..."
+    cd ../../..
+    ./mvnw clean package
+    cd ../..
+else
+    echo
+    echo "Docker image already exists in Docker Hub. Skipping build..."
+    cd ../../../../..
+fi
 
 # Terraform 3 - Purchase
 cd terraform/Quarkus/Purchase
@@ -67,9 +76,18 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-cd ../../..
-./mvnw clean package
-cd ../..
+# Builds the Docker image or skips if it already exists in Docker Hub
+if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/loyaltycard/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
+    echo
+    echo "Docker image not found in Docker Hub. Building package..."
+    cd ../../..
+    ./mvnw clean package
+    cd ../..
+else
+    echo
+    echo "Docker image already exists in Docker Hub. Skipping build..."
+    cd ../../../../..
+fi
 
 # Terraform 4 - loyaltycard
 cd terraform/Quarkus/loyaltycard
@@ -91,9 +109,18 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-cd ../../..
-./mvnw clean package
-cd ../..
+# Builds the Docker image or skips if it already exists in Docker Hub
+if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/customer/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
+    echo
+    echo "Docker image not found in Docker Hub. Building package..."
+    cd ../../..
+    ./mvnw clean package
+    cd ../..
+else
+    echo
+    echo "Docker image already exists in Docker Hub. Skipping build..."
+    cd ../../../../..
+fi
 
 # Terraform 5 - customer
 cd terraform/Quarkus/customer
@@ -115,9 +142,18 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-cd ../../..
-./mvnw clean package
-cd ../..
+# Builds the Docker image or skips if it already exists in Docker Hub
+if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/shop/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
+    echo
+    echo "Docker image not found in Docker Hub. Building package..."
+    cd ../../..
+    ./mvnw clean package
+    cd ../..
+else
+    echo
+    echo "Docker image already exists in Docker Hub. Skipping build..."
+    cd ../../../../..
+fi
 
 # Terraform 6 - shop
 cd terraform/Quarkus/shop
@@ -132,6 +168,7 @@ cd terraform/Kong
 terraform init
 terraform apply -auto-approve
 pathKong="$(terraform state show aws_instance.installKong | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+export TF_VAR_addressKong="http://${pathKong}:8001"
 cd ../..
 
 # ================================================================================
@@ -158,9 +195,15 @@ source scripts/terraform/ExportAddresses.sh
 
 source scripts/api/KongConfiguration.sh
 
+# =============================== Update Bpmn Files ==============================
+
+source scripts/bpmn/UpdateBpmn.sh
+
 # ========================== Showing all the PUBLIC_DNSs =========================
 
 source scripts/terraform/PrintAddresses.sh
+
+# ================================================================================
 
 echo "Finished deployment."
 echo

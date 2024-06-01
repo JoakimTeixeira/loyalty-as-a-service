@@ -4,7 +4,9 @@ resource "aws_instance" "installKonga" {
   vpc_security_group_ids = [aws_security_group.instance.id]
   key_name               = "vockey"
 
-  user_data = file("deploy.sh")
+  user_data = base64encode(templatefile("deploy.sh", {
+    addressKong = var.addressKong
+  }))
 
   user_data_replace_on_change = true
 

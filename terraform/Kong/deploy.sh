@@ -1,12 +1,16 @@
 #!/bin/bash
-echo "Starting..."
+echo "Starting Kong container setup..."
 
+# Install Docker
 sudo yum install -y docker
 
+# Start Docker service
 sudo service docker start
 
+# Create Docker network
 sudo docker network create kong-net
 
+# Run PostgreSQL container for Kong database
 sudo docker run -d --name kong-database \
   --network=kong-net \
   -p 5432:5432 \
@@ -15,12 +19,14 @@ sudo docker run -d --name kong-database \
   -e "POSTGRES_PASSWORD=kongpass" \
   postgres:13
 
+# Run Kong migrations
 sudo docker run --rm --network=kong-net \
   -e "KONG_DATABASE=postgres" \
   -e "KONG_PG_HOST=kong-database" \
   -e "KONG_PG_PASSWORD=kongpass" \
   kong:3.1.1 kong migrations bootstrap
 
+# Run Kong container
 sudo docker run -d --name kong-gateway \
   --network=kong-net \
   -e "KONG_DATABASE=postgres" \
@@ -38,4 +44,4 @@ sudo docker run -d --name kong-gateway \
   -p 127.0.0.1:8444:8444 \
   kong:3.1.1
 
-echo "Finished."
+echo "Kong container setup finished."

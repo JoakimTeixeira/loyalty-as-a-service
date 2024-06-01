@@ -52,7 +52,7 @@
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
-            <camunda:inputParameter name="url">http://ec2-3-235-181-156.compute-1.amazonaws.com:8080/Shop</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL</camunda:inputParameter>
             <camunda:inputParameter name="payload">{
 "id":0,
 "location":"${LocationAddress}",
@@ -63,6 +63,7 @@
               <camunda:map>
                 <camunda:entry key="Accept">application/json</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
+                <camunda:entry key="Host">servershop.com</camunda:entry>
               </camunda:map>
             </camunda:inputParameter>
           </camunda:inputOutput>

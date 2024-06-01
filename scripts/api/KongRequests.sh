@@ -1,12 +1,6 @@
 #!/bin/bash
 
-source scripts/terraform/ExportAddresses.sh
-
-KONG_SERVER_ADDRESS="http://${pathKong}"
-SHOP_URL="http://${pathShop}:8080/Shop"
-PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
-CUSTOMER_URL="http://${pathCustomer}:8080/Customer"
-LOYALTYCARD_URL="http://${pathLoyaltyCard}:8080/LoyaltyCard"
+# Accesses variables exported by KongConfiguration.sh after running DeploymentAutomation-ubuntu.sh
 
 # == SHOP ==
 
