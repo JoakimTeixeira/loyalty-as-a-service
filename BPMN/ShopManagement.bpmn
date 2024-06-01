@@ -30,10 +30,10 @@
     <ns2:sequenceFlow id="Flow_bb5888fa-09e6-4065-8708-c2edf6d189f5" sourceRef="Activity_67317895-66a5-4c33-a4bc-0bebc6a11de6" targetRef="Activity_56065da5-02bf-4be6-9684-e98578dbfd87" />
     <ns2:sequenceFlow id="Flow_e5b019ef-2116-42d5-a1d6-82c0e6f57a38" sourceRef="Activity_56065da5-02bf-4be6-9684-e98578dbfd87" targetRef="Activity_8d375442-d52a-4e2f-bf77-6b72b28b8fe2" />
     <ns2:sequenceFlow id="Flow_5f1b9c96-06c8-492a-9c8b-6e03329d5a39" sourceRef="Activity_8d375442-d52a-4e2f-bf77-6b72b28b8fe2" targetRef="Activity_054bedee-c253-41c5-a003-79b9fa25f3c9" />
-    <ns2:userTask id="Activity_67317895-66a5-4c33-a4bc-0bebc6a11de6" name="Verify if Shop Creation is possible" camunda:assignee="demo">
+    <ns2:userTask id="Activity_67317895-66a5-4c33-a4bc-0bebc6a11de6" name="Verify if Shop Creation is Possible" camunda:assignee="demo">
       <ns2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="IsPossible" label="IsPossible" type="boolean" defaultValue="true" />
+          <camunda:formField id="isPossible" label="isPossible" type="boolean" defaultValue="true" />
         </camunda:formData>
       </ns2:extensionElements>
       <ns2:incoming>Flow_cb7f6948-abc4-49ba-a9bb-890ccbb7b762</ns2:incoming>
@@ -42,7 +42,7 @@
     <ns2:userTask id="Activity_11b6250a-0692-4e73-ba03-2cf01710e134" name="Check Shop Creation" camunda:assignee="demo">
       <ns2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="IsCreatedCorrectly" label="IsCreatedCorrectly" type="boolean" />
+          <camunda:formField id="isCreatedCorrectly" label="isCreatedCorrectly" type="boolean" />
         </camunda:formData>
       </ns2:extensionElements>
       <ns2:incoming>Flow_eb934dd3-b1f0-46cf-9326-d712a7fdb3f6</ns2:incoming>
@@ -54,15 +54,15 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="url">http://ec2-3-235-181-156.compute-1.amazonaws.com:8080/Shop</camunda:inputParameter>
             <camunda:inputParameter name="payload">{
-  "id":0,
-  "location":"${LocationAddress}",
-  "name":"${NameShop}"
+"id":0,
+"location":"${LocationAddress}",
+"name":"${NameShop}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
+                <camunda:entry key="Accept">application/json</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
-                <camunda:entry key="accept">application/json</camunda:entry>
               </camunda:map>
             </camunda:inputParameter>
           </camunda:inputOutput>

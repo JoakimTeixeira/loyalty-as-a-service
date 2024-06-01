@@ -95,16 +95,16 @@
     <ns2:endEvent id="Event_a0eb856f-1a9a-496f-bc36-76902048ccf2">
       <ns2:incoming>Flow_5b6f0882-e6ae-455a-ad09-874788b84edb</ns2:incoming>
     </ns2:endEvent>
-    <ns2:userTask id="Activity_c7b201a0-930d-43aa-aef8-2c5c27078a02" name="Check Customer Creation order" camunda:assignee="demo">
+    <ns2:userTask id="Activity_c7b201a0-930d-43aa-aef8-2c5c27078a02" name="Check Customer Creation Order" camunda:assignee="demo">
       <ns2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="productok" label="productok" type="boolean" />
+          <camunda:formField id="productOk" label="productOk" type="boolean" />
         </camunda:formData>
       </ns2:extensionElements>
       <ns2:incoming>Flow_0bd7ebb2-8146-48f7-a8ee-630bb9e2c989</ns2:incoming>
       <ns2:outgoing>Flow_b38445b4-18d9-45fc-b064-3383b937efce</ns2:outgoing>
     </ns2:userTask>
-    <ns2:sendTask id="Activity_0114ffd8-a98c-4bb9-939c-ebe65dd45cea" name="Request Customer Creation order">
+    <ns2:sendTask id="Activity_0114ffd8-a98c-4bb9-939c-ebe65dd45cea" name="Request Customer Creation Order">
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -131,16 +131,16 @@
       <ns2:incoming>Flow_edcbc2ac-300f-41c9-9c9a-a777df436c8d</ns2:incoming>
       <ns2:outgoing>Flow_d3a95c54-4175-43c2-9521-dfe77da1c3fd</ns2:outgoing>
     </ns2:sendTask>
-    <ns2:userTask id="Activity_ec0f63f1-76db-4677-acbe-b1e48c512bb5" name="Decide what to do next" camunda:assignee="demo">
+    <ns2:userTask id="Activity_ec0f63f1-76db-4677-acbe-b1e48c512bb5" name="Decide What to do Next" camunda:assignee="demo">
       <ns2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="newrequest" label="newrequest" type="boolean" />
+          <camunda:formField id="newRequest" label="newRequest" type="boolean" />
         </camunda:formData>
       </ns2:extensionElements>
       <ns2:incoming>Flow_06ce588e-8cb7-4ad5-ba47-b5b67c442120</ns2:incoming>
       <ns2:outgoing>Flow_5274d474-3dad-4448-8d68-1cdc8030f715</ns2:outgoing>
     </ns2:userTask>
-    <ns2:userTask id="Activity_ada7bed6-135e-4d9d-93b9-ce47f1f9b2dc" name="Decide the Data for Customer Creation order" camunda:assignee="demo">
+    <ns2:userTask id="Activity_ada7bed6-135e-4d9d-93b9-ce47f1f9b2dc" name="Decide the Data for Customer Creation Order" camunda:assignee="demo">
       <ns2:extensionElements>
         <camunda:formData>
           <camunda:formField id="FiscalNumber" label="FiscalNumber" type="long" />
@@ -152,7 +152,7 @@
       <ns2:incoming>Flow_5936b423-bd45-4b26-9b1e-03c32c176bd0</ns2:incoming>
       <ns2:outgoing>Flow_5903ee45-b2d4-482d-a42d-037a924516aa</ns2:outgoing>
     </ns2:userTask>
-    <ns2:sendTask id="Activity_0cgm4mj" name="Reject Customer Creation order">
+    <ns2:sendTask id="Activity_0cgm4mj" name="Reject Customer Creation Order">
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -175,7 +175,7 @@
       <ns2:incoming>Flow_1p4ejmb</ns2:incoming>
       <ns2:outgoing>Flow_0n0lctp</ns2:outgoing>
     </ns2:sendTask>
-    <ns2:sendTask id="Activity_06moxmf" name="Accept Customer Creation order">
+    <ns2:sendTask id="Activity_06moxmf" name="Accept Customer Creation Order">
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -200,12 +200,12 @@
     </ns2:sendTask>
     <ns2:sequenceFlow id="Flow_5903ee45-b2d4-482d-a42d-037a924516aa" sourceRef="Activity_ada7bed6-135e-4d9d-93b9-ce47f1f9b2dc" targetRef="Gateway_bdb08ba5-4ead-485d-8ad4-20b91bfcaf79" />
     <ns2:sequenceFlow id="Flow_38e92dab-fd4f-4291-a54c-627d5f511332" name="Yes" sourceRef="Gateway_57cd7c44-845f-4ad1-be32-3aa8f371784f" targetRef="Gateway_bdb08ba5-4ead-485d-8ad4-20b91bfcaf79">
-      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${newrequest}</ns2:conditionExpression>
+      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${newRequest}</ns2:conditionExpression>
     </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_edcbc2ac-300f-41c9-9c9a-a777df436c8d" sourceRef="Gateway_bdb08ba5-4ead-485d-8ad4-20b91bfcaf79" targetRef="Activity_0114ffd8-a98c-4bb9-939c-ebe65dd45cea" />
     <ns2:sequenceFlow id="Flow_5274d474-3dad-4448-8d68-1cdc8030f715" sourceRef="Activity_ec0f63f1-76db-4677-acbe-b1e48c512bb5" targetRef="Gateway_57cd7c44-845f-4ad1-be32-3aa8f371784f" />
     <ns2:sequenceFlow id="Flow_ea9a4921-ad02-4e2d-9f3a-e187190fc856" name="No" sourceRef="Gateway_57cd7c44-845f-4ad1-be32-3aa8f371784f" targetRef="Event_95f52bbf-82df-475b-b51e-583eb92b41b9">
-      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${!newrequest}</ns2:conditionExpression>
+      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${!newRequest}</ns2:conditionExpression>
     </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_16d619a7-565d-4858-8648-fa0240687905" sourceRef="Gateway_c4b9451d-9ff6-4f06-a669-3a559d7f5d19" targetRef="Event_442f9699-cfa2-4319-ad7a-3a2ee3dfb9da" />
     <ns2:sequenceFlow id="Flow_06ce588e-8cb7-4ad5-ba47-b5b67c442120" sourceRef="Event_442f9699-cfa2-4319-ad7a-3a2ee3dfb9da" targetRef="Activity_ec0f63f1-76db-4677-acbe-b1e48c512bb5" />
@@ -220,10 +220,10 @@
     <ns2:sequenceFlow id="Flow_5052b95f-849c-422b-bd34-dbab01cd6abb" sourceRef="Event_efc51f79-697f-45f0-9d3d-498dfa017797" targetRef="Event_aa36ab06-5afe-4581-8ba9-00783f7f3ae7" />
     <ns2:sequenceFlow id="Flow_b38445b4-18d9-45fc-b064-3383b937efce" sourceRef="Activity_c7b201a0-930d-43aa-aef8-2c5c27078a02" targetRef="Gateway_c2a2f64c-ede6-4001-8894-b4214d218455" />
     <ns2:sequenceFlow id="Flow_036a235b-d78f-479f-9cfb-10fb3f5c76c2" name="Yes" sourceRef="Gateway_c2a2f64c-ede6-4001-8894-b4214d218455" targetRef="Activity_06moxmf">
-      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${productok}</ns2:conditionExpression>
+      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${productOk}</ns2:conditionExpression>
     </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_1p4ejmb" name="No" sourceRef="Gateway_c2a2f64c-ede6-4001-8894-b4214d218455" targetRef="Activity_0cgm4mj">
-      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${!productok}</ns2:conditionExpression>
+      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${!productOk}</ns2:conditionExpression>
     </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_5b6f0882-e6ae-455a-ad09-874788b84edb" sourceRef="Activity_06moxmf" targetRef="Event_a0eb856f-1a9a-496f-bc36-76902048ccf2" />
     <ns2:sequenceFlow id="Flow_5936b423-bd45-4b26-9b1e-03c32c176bd0" sourceRef="Event_261ff510-8687-4be0-9a23-9d6d19eafaf3" targetRef="Activity_ada7bed6-135e-4d9d-93b9-ce47f1f9b2dc" />
@@ -276,14 +276,14 @@
       <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${!agree}</ns2:conditionExpression>
     </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_53aa5b34-98b7-424a-8e1d-19b6d7b951f8" name="Yes" sourceRef="Gateway_3f7918f1-9c4c-4176-9cab-897a8bbe3878" targetRef="Activity_b41a384b-8425-434a-9240-e322025f4bcd">
-      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${promise}</ns2:conditionExpression>
+      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${isPossible}</ns2:conditionExpression>
     </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_e004af53-e730-4e3d-aaed-3295d133902c" name="No" sourceRef="Gateway_3f7918f1-9c4c-4176-9cab-897a8bbe3878" targetRef="Activity_0yrey7y">
-      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${!promise}</ns2:conditionExpression>
+      <ns2:conditionExpression xsi:type="ns2:tFormalExpression">${!isPossible}</ns2:conditionExpression>
     </ns2:sequenceFlow>
     <ns2:sequenceFlow id="Flow_ec351f80-2b66-4ba9-9f41-06807a583fa2" sourceRef="Activity_e67ad815-e9da-4c51-868d-951fdcd37132" targetRef="Gateway_3f7918f1-9c4c-4176-9cab-897a8bbe3878" />
     <ns2:sequenceFlow id="Flow_21dcedb0-6a06-475d-aecf-87c723415566" sourceRef="Event_2e52d0f6-d71e-4f32-a59e-8f1adf71ced3" targetRef="Activity_e67ad815-e9da-4c51-868d-951fdcd37132" />
-    <ns2:sendTask id="Activity_121uouo" name="Agree with arguments for rejection">
+    <ns2:sendTask id="Activity_121uouo" name="Agree with Arguments for Rejection">
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -306,7 +306,7 @@
       <ns2:incoming>Flow_0z5k6bt</ns2:incoming>
       <ns2:outgoing>Flow_1ku6k85</ns2:outgoing>
     </ns2:sendTask>
-    <ns2:sendTask id="Activity_04wyitf" name="Declare Customer Creation order">
+    <ns2:sendTask id="Activity_04wyitf" name="Declare Customer Creation Order">
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -329,7 +329,7 @@
       <ns2:incoming>Flow_0tgwugo</ns2:incoming>
       <ns2:outgoing>Flow_0xnu67u</ns2:outgoing>
     </ns2:sendTask>
-    <ns2:sendTask id="Activity_b41a384b-8425-434a-9240-e322025f4bcd" name="Promise Customer Creation order">
+    <ns2:sendTask id="Activity_b41a384b-8425-434a-9240-e322025f4bcd" name="Promise Customer Creation Order">
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -376,7 +376,7 @@
     <ns2:endEvent id="Event_0ld7huy">
       <ns2:incoming>Flow_0jht5r4</ns2:incoming>
     </ns2:endEvent>
-    <ns2:userTask id="Activity_9b6702b7-cbf5-42ff-b7eb-ac00316331eb" name="Evaluate arguments for rejection" camunda:assignee="demo">
+    <ns2:userTask id="Activity_9b6702b7-cbf5-42ff-b7eb-ac00316331eb" name="Evaluate Arguments for Rejection" camunda:assignee="demo">
       <ns2:extensionElements>
         <camunda:formData>
           <camunda:formField id="agree" label="agree" type="boolean" />
@@ -390,10 +390,10 @@
       <ns2:outgoing>Flow_1abb94dd-1886-4749-b946-cddb4dc68877</ns2:outgoing>
       <ns2:outgoing>Flow_0z5k6bt</ns2:outgoing>
     </ns2:exclusiveGateway>
-    <ns2:userTask id="Activity_e67ad815-e9da-4c51-868d-951fdcd37132" name="Verify if execute product is possible" camunda:assignee="demo">
+    <ns2:userTask id="Activity_e67ad815-e9da-4c51-868d-951fdcd37132" name="Verify if Execute Product is Possible" camunda:assignee="demo">
       <ns2:extensionElements>
         <camunda:formData>
-          <camunda:formField id="promise" label="promise" type="boolean" defaultValue="true" />
+          <camunda:formField id="isPossible" label="isPossible" type="boolean" defaultValue="true" />
         </camunda:formData>
       </ns2:extensionElements>
       <ns2:incoming>Flow_21dcedb0-6a06-475d-aecf-87c723415566</ns2:incoming>
@@ -404,16 +404,16 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="payload">{
-  "FiscalNumber": "${FiscalNumber}",
-  "id": 0,
-  "location": "${LocationAddress}",
-  "name": "${Name}"
+"FiscalNumber": "${FiscalNumber}",
+"id": 0,
+"location": "${LocationAddress}",
+"name": "${Name}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
             <camunda:inputParameter name="url">http://ec2-44-200-79-100.compute-1.amazonaws.com:8080/Customer</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
-                <camunda:entry key="accept">application/json</camunda:entry>
+                <camunda:entry key="Accept">application/json</camunda:entry>
                 <camunda:entry key="Content-Type">application/json</camunda:entry>
               </camunda:map>
             </camunda:inputParameter>
@@ -438,7 +438,7 @@
       <ns2:outgoing>Flow_21dcedb0-6a06-475d-aecf-87c723415566</ns2:outgoing>
       <ns2:messageEventDefinition id="EventDefinition_b987a1a3-566e-41c0-ba7c-9006188d59a1" messageRef="Message_05o1brq" />
     </ns2:startEvent>
-    <ns2:sendTask id="Activity_0yrey7y" name="Decline Customer Creation order">
+    <ns2:sendTask id="Activity_0yrey7y" name="Decline Customer Creation Order">
       <ns2:extensionElements>
         <camunda:connector>
           <camunda:inputOutput>
@@ -567,6 +567,7 @@
       </ns4:BPMNShape>
       <ns4:BPMNShape id="Activity_1nc1oiu_di" bpmnElement="Activity_ec0f63f1-76db-4677-acbe-b1e48c512bb5">
         <ns5:Bounds x="598" y="279" width="100" height="80" />
+        <ns4:BPMNLabel />
       </ns4:BPMNShape>
       <ns4:BPMNShape id="Activity_164b8ck_di" bpmnElement="Activity_ada7bed6-135e-4d9d-93b9-ce47f1f9b2dc">
         <ns5:Bounds x="350" y="105" width="100" height="80" />
@@ -591,7 +592,7 @@
         <ns3:waypoint x="539" y="301" />
         <ns3:waypoint x="539" y="163" />
         <ns4:BPMNLabel>
-          <ns5:Bounds x="545" y="277" width="18" height="14" />
+          <ns5:Bounds x="545" y="277" width="19" height="14" />
         </ns4:BPMNLabel>
       </ns4:BPMNEdge>
       <ns4:BPMNEdge id="Edge_ae1ce74c-6a5b-4ec2-9ea6-383d46e9f2f7" bpmnElement="Flow_edcbc2ac-300f-41c9-9c9a-a777df436c8d">
@@ -661,7 +662,7 @@
         <ns3:waypoint x="1296" y="145" />
         <ns3:waypoint x="1350" y="145" />
         <ns4:BPMNLabel>
-          <ns5:Bounds x="1315" y="154" width="18" height="14" />
+          <ns5:Bounds x="1315" y="154" width="19" height="14" />
         </ns4:BPMNLabel>
       </ns4:BPMNEdge>
       <ns4:BPMNEdge id="Flow_1p4ejmb_di" bpmnElement="Flow_1p4ejmb">
@@ -733,6 +734,7 @@
       </ns4:BPMNShape>
       <ns4:BPMNShape id="Activity_10utz30_di" bpmnElement="Activity_9b6702b7-cbf5-42ff-b7eb-ac00316331eb">
         <ns5:Bounds x="1075" y="433" width="100" height="80" />
+        <ns4:BPMNLabel />
       </ns4:BPMNShape>
       <ns4:BPMNShape id="Gateway_d2cb1914-4245-4743-b107-df81cb1529ab_di" bpmnElement="Gateway_d2cb1914-4245-4743-b107-df81cb1529ab" isMarkerVisible="true">
         <ns5:Bounds x="996" y="455" width="36" height="36" />
@@ -742,6 +744,7 @@
       </ns4:BPMNShape>
       <ns4:BPMNShape id="Activity_1hcy79m_di" bpmnElement="Activity_e67ad815-e9da-4c51-868d-951fdcd37132">
         <ns5:Bounds x="396" y="527" width="100" height="80" />
+        <ns4:BPMNLabel />
       </ns4:BPMNShape>
       <ns4:BPMNShape id="Activity_1rhs2ng_di" bpmnElement="Activity_8a65cc5c-3044-4a2b-a08e-58c41cc97372" bioc:stroke="#831311" bioc:fill="#ffcdd2" color:background-color="#ffcdd2" color:border-color="#831311">
         <ns5:Bounds x="846" y="527" width="100" height="80" />
@@ -831,7 +834,7 @@
         <ns3:waypoint x="582" y="567" />
         <ns3:waypoint x="669" y="567" />
         <ns4:BPMNLabel>
-          <ns5:Bounds x="587" y="549" width="18" height="14" />
+          <ns5:Bounds x="587" y="549" width="19" height="14" />
         </ns4:BPMNLabel>
       </ns4:BPMNEdge>
       <ns4:BPMNEdge id="Edge_07ba18d8-2a2c-43d7-883d-1e1f111f8efe" bpmnElement="Flow_e004af53-e730-4e3d-aaed-3295d133902c">
