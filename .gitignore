@@ -1,2 +1,12 @@
+# General
+*.log
 *.logs
+
+# Auth
 *.pem
+
+# Terraform
+*.terraform
+*.tfstate
+*.tfstate.backup
+*.tfstate.lock.*
