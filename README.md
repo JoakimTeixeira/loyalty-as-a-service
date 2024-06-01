@@ -1,6 +1,6 @@
 # Loyalty-as-a-Service (LaaS)
 
-System to manage loyalty programs for supermarkets
+Distributed and highly scalable supermarket chain management system
 
 ## Running the Project
 
