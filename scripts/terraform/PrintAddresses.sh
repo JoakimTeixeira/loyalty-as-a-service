@@ -44,7 +44,7 @@ echo "http://${pathKonga}:1337/register"
 echo
 
 echo "CAMUNDA IS AVAILABLE HERE:"
-echo "http://${addressCamunda}:8080/camunda"
+echo "http://${pathCamunda}:8080/camunda"
 echo
 
 echo

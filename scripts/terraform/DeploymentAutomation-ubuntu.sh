@@ -199,6 +199,10 @@ source scripts/api/KongConfiguration.sh
 
 source scripts/bpmn/UpdateBpmn.sh
 
+# =========================== Update Postman Tests File ==========================
+
+source scripts/bpmn/UpdatePostman.sh
+
 # ========================== Showing all the PUBLIC_DNSs =========================
 
 source scripts/terraform/PrintAddresses.sh

@@ -1942,7 +1942,7 @@
   "variable": [
     {
       "key": "host",
-      "value": "http://ec2-54-174-64-248.compute-1.amazonaws.com",
+      "value": "http://ec2-CAMUNDA_URL",
       "type": "default"
     },
     {
