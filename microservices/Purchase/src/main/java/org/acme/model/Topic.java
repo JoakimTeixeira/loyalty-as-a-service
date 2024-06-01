@@ -1,17 +1,31 @@
 package org.acme.model;
 
 public class Topic {
-    public String TopicName;
+    private String topicName;
+    private static final String TOPIC_EVENT_NAME = "Purchase_Event";
 
     public Topic() {
+
     }
 
-    public Topic(String topicName) {
-        TopicName = topicName;
+    public Topic(String name) {
+        this.setTopicName(name);
+    }
+
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String name) {
+        this.topicName = name;
+    }
+
+    public static String getTopicEventName() {
+        return TOPIC_EVENT_NAME;
     }
 
     @Override
     public String toString() {
-        return "Topic [TopicName=" + TopicName + "]";
+        return "Topic [topicName=" + this.getTopicName() + "]";
     }
 }

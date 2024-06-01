@@ -1,5 +1,10 @@
 package org.acme;
 
+import java.time.LocalDateTime;
+
+import org.acme.model.Topic;
+import org.json.JSONObject;
+
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.mysqlclient.MySQLPool;
@@ -8,15 +13,43 @@ import io.vertx.mutiny.sqlclient.RowSet;
 import io.vertx.mutiny.sqlclient.Tuple;
 
 public class Purchase {
-    public Long id;
-    public java.time.LocalDateTime dateTime;
-    public Float price;
-    public String product;
-    public String supplier;
-    public String shopName;
-    public Long loyaltyCardId;
+    private Long id;
+    private LocalDateTime dateTime;
+    private Float price;
+    private String product;
+    private String supplier;
+    private String shopName;
+    private Long loyaltyCardId;
 
-    public Purchase(Long id, java.time.LocalDateTime dateTime, Float price, String product, String supplier,
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public Long getLoyaltyCardId() {
+        return loyaltyCardId;
+    }
+
+    public Purchase(Long id, LocalDateTime dateTime, Float price, String product, String supplier,
             String shopName, Long loyaltyCardId) {
         this.id = id;
         this.dateTime = dateTime;
@@ -30,11 +63,18 @@ public class Purchase {
     public Purchase() {
     }
 
-    @Override
-    public String toString() {
-        return "{id=" + id + ", dateTime=" + dateTime.toString() + ", price=" + price + ", product=" + product
-                + ", supplier="
-                + supplier + ", shopName=" + shopName + ", loyaltyCardId=" + loyaltyCardId + "}";
+    public String serializeContent() {
+        final String TOPIC_EVENT_NAME = Topic.getTopicEventName();
+
+        return new JSONObject().put(TOPIC_EVENT_NAME, new JSONObject()
+                .put("id", this.getId())
+                .put("dateTime", this.getDateTime().toString())
+                .put("price", this.getPrice())
+                .put("product", this.getProduct())
+                .put("supplier", this.getSupplier())
+                .put("shopName", this.getShopName())
+                .put("loyaltyCardId", this.getProduct()))
+                .toString();
     }
 
     private static Purchase from(Row row) {
