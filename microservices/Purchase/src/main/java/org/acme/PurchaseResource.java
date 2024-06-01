@@ -19,15 +19,15 @@ import io.smallrye.mutiny.Uni;
 import io.vertx.mutiny.mysqlclient.MySQLPool;
 
 @Path("Purchase")
-public class KafkaProvisioningResource {
+public class PurchaseResource {
     private final MySQLPool client;
     private final String kafkaServers;
     private final boolean schemaCreate;
 
-    private static final Logger LOG = LoggerFactory.getLogger(KafkaProvisioningResource.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchaseResource.class);
 
     @Inject
-    public KafkaProvisioningResource(
+    public PurchaseResource(
             MySQLPool client,
             @ConfigProperty(name = "kafka.bootstrap.servers") String kafkaServers,
             @ConfigProperty(name = "myapp.schema.create", defaultValue = "true") boolean schemaCreate) {
@@ -66,7 +66,7 @@ public class KafkaProvisioningResource {
     @Path("Consume")
     public String provisioningConsumer(Topic topic) {
         try {
-            Thread worker = new DynamicTopicConsumer(client, topic.getTopicName(), kafkaServers);
+            Thread worker = new PurchaseConsumer(client, topic.getTopicName(), kafkaServers);
             worker.start();
             LOG.info("New worker started for topic: {}", topic.getTopicName());
             return "New worker started";

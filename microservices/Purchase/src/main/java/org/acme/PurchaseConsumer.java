@@ -20,15 +20,15 @@ import io.vertx.mutiny.mysqlclient.MySQLPool;
 import io.vertx.mutiny.sqlclient.Tuple;
 import jakarta.inject.Inject;
 
-public class DynamicTopicConsumer extends Thread {
+public class PurchaseConsumer extends Thread {
     private MySQLPool client;
     private String kafkaServers;
     private String topicName;
 
-    private static final Logger LOG = LoggerFactory.getLogger(DynamicTopicConsumer.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PurchaseConsumer.class);
 
     @Inject
-    public DynamicTopicConsumer(
+    public PurchaseConsumer(
             MySQLPool client,
             String topicName,
             @ConfigProperty(name = "kafka.bootstrap.servers") String kafkaServers) {
