@@ -229,26 +229,8 @@ cd ../../..
 
 # ================================================================================
 
-# Terraform 9 - Kong
+# Terraform 9 - Kong, Konga and Camunda
 cd terraform/Kong
-terraform init
-terraform apply -auto-approve
-pathKong="$(terraform state show aws_instance.installKong | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-export TF_VAR_addressKong="http://${pathKong}:8001"
-cd ../..
-
-# ================================================================================
-
-# Terraform 10 - Konga
-cd terraform/Konga
-terraform init
-terraform apply -auto-approve
-cd ../..
-
-# ================================================================================
-
-# Terraform 11 - Camunda
-cd terraform/Camunda
 terraform init
 terraform apply -auto-approve
 cd ../..

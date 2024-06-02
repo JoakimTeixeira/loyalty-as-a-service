@@ -1,4 +1,4 @@
-resource "aws_instance" "installKong" {
+resource "aws_instance" "installKongKongaCamunda" {
   ami                    = "ami-0b5eea76982371e91"
   instance_type          = "t2.small"
   vpc_security_group_ids = [aws_security_group.instance.id]
@@ -9,7 +9,7 @@ resource "aws_instance" "installKong" {
   user_data_replace_on_change = true
 
   tags = {
-    Name = "terraform-example-Kong"
+    Name = "terraform-Kong-Konga-Camunda"
   }
 }
 

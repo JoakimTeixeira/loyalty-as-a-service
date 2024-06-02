@@ -43,16 +43,7 @@ export pathCrossSelling="$(terraform state show aws_instance.crossSellingQuarkus
 cd ../../..
 
 cd terraform/Kong
-export pathKong="$(terraform state show aws_instance.installKong | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-export TF_VAR_addressKong="http://${pathKong}:8001"
-cd ../..
-
-cd terraform/Konga
-export pathKonga="$(terraform state show aws_instance.installKonga | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
-cd ../..
-
-cd terraform/Camunda
-export pathCamunda="$(terraform state show aws_instance.installCamundaEngine | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+export pathKongKongaCamunda="$(terraform state show aws_instance.installKongKongaCamunda | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
 cd ../..
 
 echo "Finished exporting addresses."

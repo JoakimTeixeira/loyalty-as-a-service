@@ -5,7 +5,7 @@
 echo "Starting Kong services and routes configuration..."
 echo
 
-export KONG_SERVER_ADDRESS="http://${pathKong}"
+export KONG_SERVER_ADDRESS="http://${pathKongKongaCamunda}"
 export SHOP_URL="http://${pathShop}:8080/Shop"
 export PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
 export CUSTOMER_URL="http://${pathCustomer}:8080/Customer"

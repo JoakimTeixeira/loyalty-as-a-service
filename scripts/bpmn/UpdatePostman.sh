@@ -3,16 +3,16 @@
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$BASE_DIR"
 
-# Accesses the "pathCamunda" variable exported by ExportAddresses.sh after running DeploymentAutomation-ubuntu.sh
+# Accesses the "pathKongKongaCamunda" variable exported by ExportAddresses.sh after running DeploymentAutomation-ubuntu.sh
 
 echo "Starting JSON file update..."
 echo
 
-# Ensure the "pathCamunda" variable is set
-if [[ -z "$pathCamunda" ]]; then
-    echo "The variable \"pathCamunda\" is empty, please export it and try again. Exiting..."
+# Ensure the "pathKongKongaCamunda" variable is set
+if [[ -z "$pathKongKongaCamunda" ]]; then
+    echo "The variable \"pathKongKongaCamunda\" is empty, please export it and try again. Exiting..."
 else
-    addressCamunda="http://${pathCamunda}"
+    addressCamunda="http://${pathKongKongaCamunda}"
     JSON_FILE="bpmn/tests/CamundaWorkflows.postman_collection.json"
 
     # Insert the addressCamunda variable as value after the tag "host"

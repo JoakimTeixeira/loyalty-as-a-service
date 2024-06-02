@@ -1,4 +1,4 @@
 output "address" {
-  value       = aws_instance.installKong.public_dns
-  description = "Connect to the KONG at this endpoint"
+  value       = aws_instance.installKongKongaCamunda.public_dns
+  description = "Connect to the KONG, KONGA and CAMUNDA at this endpoint"
 }

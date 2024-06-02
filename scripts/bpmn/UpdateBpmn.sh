@@ -3,17 +3,17 @@
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$BASE_DIR"
 
-# Accesses the "pathKong" variable exported by ExportAddresses.sh after running DeploymentAutomation-ubuntu.sh
+# Accesses the "pathKongKongaCamunda" variable exported by ExportAddresses.sh after running DeploymentAutomation-ubuntu.sh
 
 echo
 echo "Starting BPMN file update..."
 echo
 
-# Ensure the "pathKong" variable is set
-if [[ -z "$pathKong" ]]; then
-    echo "The variable \"pathKong\" is empty, please export it and try again. Exiting..."
+# Ensure the "pathKongKongaCamunda" variable is set
+if [[ -z "$pathKongKongaCamunda" ]]; then
+    echo "The variable \"pathKongKongaCamunda\" is empty, please export it and try again. Exiting..."
 else
-    addressKong="http://${pathKong}:8000"
+    addressKong="http://${pathKongKongaCamunda}:8000"
 
     # # Insert the addressKong variable as value where it has an ec2 address
     for file in bpmn/*.bpmn; do

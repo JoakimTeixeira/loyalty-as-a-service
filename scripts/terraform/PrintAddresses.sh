@@ -41,18 +41,18 @@ echo "http://${pathCrossSelling}:8080/q/swagger-ui/"
 echo
 
 echo "KONG IS AVAILABLE HERE:"
-echo "http://${pathKong}:8001/"
+echo "http://${pathKongKongaCamunda}:8001/"
 echo
 
 echo "KONGA LOGIN PAGE IS AVAILABLE HERE:"
-echo "http://${pathKonga}:1337/#!/login"
+echo "http://${pathKongKongaCamunda}:1337/#!/login"
 echo
 echo "KONGA REGISTER PAGE IS AVAILABLE HERE:"
-echo "http://${pathKonga}:1337/register"
+echo "http://${pathKongKongaCamunda}:1337/register"
 echo
 
 echo "CAMUNDA IS AVAILABLE HERE:"
-echo "http://${pathCamunda}:8080/camunda"
+echo "http://${pathKongKongaCamunda}:8080/camunda"
 echo
 
 echo

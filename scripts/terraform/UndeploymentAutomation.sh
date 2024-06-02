@@ -45,17 +45,7 @@ cd terraform/Quarkus/crossselling
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 9 - Kong
+# Terraform 9 - Kong, Konga and Camunda
 cd terraform/Kong
-terraform destroy -auto-approve
-cd ../..
-
-# Terraform 10 - Konga
-cd terraform/Konga
-terraform destroy -auto-approve
-cd ../..
-
-# Terraform 11 - Camunda
-cd terraform/Camunda
 terraform destroy -auto-approve
 cd ../..
