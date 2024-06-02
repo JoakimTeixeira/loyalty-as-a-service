@@ -6,7 +6,7 @@
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000" \
-  --header "Host: servershop.com" | python3 -m json.tool
+  --header "Host: servershop.com"
 
 curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8000" \
@@ -21,7 +21,7 @@ curl -i -X POST \
 
 curl -i -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: servershop.com" | python3 -m json.tool
+  --header "Host: servershop.com"
 
 curl -i -X PUT \
   --url "${KONG_SERVER_ADDRESS}:8000/7/ArcoCego/Porto" \
@@ -34,7 +34,7 @@ curl -i -X PUT \
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000" \
-  --header "Host: serverpurchase.com" | python3 -m json.tool
+  --header "Host: serverpurchase.com"
 
 curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8000/Consume" \
@@ -46,7 +46,7 @@ curl -i -X POST \
 
 curl -i -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: serverpurchase.com" | python3 -m json.tool
+  --header "Host: serverpurchase.com"
 
 # ===================================================================
 
@@ -54,7 +54,7 @@ curl -i -X GET \
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000" \
-  --header "Host: servercustomer.com" | python3 -m json.tool
+  --header "Host: servercustomer.com"
 
 curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8000" \
@@ -69,7 +69,7 @@ curl -i -X POST \
 
 curl -i -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: servercustomer.com" | python3 -m json.tool
+  --header "Host: servercustomer.com"
 
 curl -i -X PUT \
   --url "${KONG_SERVER_ADDRESS}:8000/1/UpdatedName/123456789/Lisbon" \
@@ -82,7 +82,7 @@ curl -i -X PUT \
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000" \
-  --header "Host: serverloyaltycard.com" | python3 -m json.tool
+  --header "Host: serverloyaltycard.com"
 
 curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8000" \
@@ -96,7 +96,7 @@ curl -i -X POST \
 
 curl -i -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: serverloyaltycard.com" | python3 -m json.tool
+  --header "Host: serverloyaltycard.com"
 
 curl -i -X PUT \
   --url "${KONG_SERVER_ADDRESS}:8000/1/2/3" \
@@ -117,7 +117,7 @@ curl -i -X POST \
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000" \
-  --header "Host: serverdiscountcoupon.com" | python3 -m json.tool
+  --header "Host: serverdiscountcoupon.com"
 
 curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8000" \
@@ -136,11 +136,11 @@ curl -i -X POST \
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: serverdiscountcoupon.com" | python3 -m json.tool
+  --header "Host: serverdiscountcoupon.com"
 
 curl -s -X DELETE \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: serverdiscountcoupon.com" | python3 -m json.tool
+  --header "Host: serverdiscountcoupon.com"
 
 # ===================================================================
 
@@ -156,7 +156,7 @@ curl -i -X POST \
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000" \
-  --header "Host: servercrossselling.com" | python3 -m json.tool
+  --header "Host: servercrossselling.com"
 
 curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8000" \
@@ -175,8 +175,8 @@ curl -i -X POST \
 
 curl -s -X GET \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: servercrossselling.com" | python3 -m json.tool
+  --header "Host: servercrossselling.com"
 
 curl -s -X DELETE \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
-  --header "Host: servercrossselling.com" | python3 -m json.tool
+  --header "Host: servercrossselling.com"
