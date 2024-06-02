@@ -11,6 +11,7 @@ export PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
 export CUSTOMER_URL="http://${pathCustomer}:8080/Customer"
 export LOYALTYCARD_URL="http://${pathLoyaltyCard}:8080/LoyaltyCard"
 export DISCOUNTCOUPON_URL="http://${pathDiscountCoupon}:8080/DiscountCoupon"
+export CROSSSELLING_URL="http://${pathCrossSelling}:8080/CrossSelling"
 
 # == SHOP ==
 
@@ -84,3 +85,18 @@ curl -i -X POST \
 curl -i -X POST \
   --url "${KONG_SERVER_ADDRESS}:8001/services/discountcoupon-service/routes" \
   --data "hosts[]=serverdiscountcoupon.com"
+
+# ===================================================================
+
+# == CROSS SELLING ==
+
+# Service
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8001/services/" \
+  --data "name=crossselling-service" \
+  --data "url=${CROSSSELLING_URL}"
+
+# Route
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8001/services/crossselling-service/routes" \
+  --data "hosts[]=servercrossselling.com"

@@ -141,3 +141,42 @@ curl -s -X GET \
 curl -s -X DELETE \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
   --header "Host: serverdiscountcoupon.com" | python3 -m json.tool
+
+# ===================================================================
+
+# == CROSS SELLING ==
+
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8000/Consume" \
+  --header "Host: servercrossselling.com" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "topicName": "CrossSelling-2-4"
+}'
+
+curl -s -X GET \
+  --url "${KONG_SERVER_ADDRESS}:8000" \
+  --header "Host: servercrossselling.com" | python3 -m json.tool
+
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8000" \
+  --header "Host: servercrossselling.com" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "topic": {
+    "topicName": "CrossSelling-2-4"
+  },
+  "crossselling": {
+    "id": 0,
+    "partnerShop": "H&M",
+    "recommendedProduct": "Jacket"
+  }
+}'
+
+curl -s -X GET \
+  --url "${KONG_SERVER_ADDRESS}:8000/1" \
+  --header "Host: servercrossselling.com" | python3 -m json.tool
+
+curl -s -X DELETE \
+  --url "${KONG_SERVER_ADDRESS}:8000/1" \
+  --header "Host: servercrossselling.com" | python3 -m json.tool
