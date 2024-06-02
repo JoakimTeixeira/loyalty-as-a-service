@@ -41,7 +41,7 @@ curl -i -X POST \
   --header "Host: serverpurchase.com" \
   --header "Content-Type: application/json" \
   --data '{
-  "TopicName": "1-ArcoCego"
+  "topicName": "1-ArcoCego"
 }'
 
 curl -i -X GET \
