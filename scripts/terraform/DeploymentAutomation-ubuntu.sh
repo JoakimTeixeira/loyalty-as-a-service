@@ -259,7 +259,8 @@ source scripts/terraform/ExportAddresses.sh
 
 # ============================ Setup Kong API Gateway ============================
 
-source scripts/api/KongConfiguration.sh
+# Wait for Kong to be ready
+sleep 30 && source scripts/api/KongConfiguration.sh
 
 # =============================== Update Bpmn Files ==============================
 
