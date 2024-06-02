@@ -35,17 +35,22 @@ cd terraform/Quarkus/loyaltycard
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 7 - Kong
+# Terraform 7 - Quarkus discountcoupon
+cd terraform/Quarkus/discountcoupon
+terraform destroy -auto-approve
+cd ../../..
+
+# Terraform 8 - Kong
 cd terraform/Kong
 terraform destroy -auto-approve
 cd ../..
 
-# Terraform 8 - Konga
+# Terraform 9 - Konga
 cd terraform/Konga
 terraform destroy -auto-approve
 cd ../..
 
-# Terraform 9 - Camunda
+# Terraform 10 - Camunda
 cd terraform/Camunda
 terraform destroy -auto-approve
 cd ../..

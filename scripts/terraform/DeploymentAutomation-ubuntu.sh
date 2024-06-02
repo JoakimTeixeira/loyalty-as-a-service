@@ -163,7 +163,40 @@ cd ../../..
 
 # ================================================================================
 
-# Terraform 7 - Kong
+# Dockerize discountcoupon Microservice -> changes the configuration of the DB connection, recompiling and packaging
+cd microservices/discountcoupon/src/main/resources
+
+# # Finds line starting with "quarkus.container-image.group=" and replaces anything after it with "$TF_VAR_dockerhub_username" variable
+sed -i 's/^quarkus\.container-image\.group=.*/quarkus.container-image.group='"$TF_VAR_dockerhub_username"'/' application.properties
+
+# # Finds line starting with "quarkus.datasource.reactive.url=" and replaces anything after it with "mysql://$addressRDS:3306/quarkus_test_all_operations"
+sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url=mysql:\/\/'"$addressRDS"':3306\/quarkus_test_all_operations/' application.properties
+
+# # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
+sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
+
+# Builds the Docker image or skips if it already exists in Docker Hub
+if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/discountcoupon/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
+    echo
+    echo "Docker image not found in Docker Hub. Building package..."
+    cd ../../..
+    ./mvnw clean package
+    cd ../..
+else
+    echo
+    echo "Docker image already exists in Docker Hub. Skipping build..."
+    cd ../../../../..
+fi
+
+# Terraform 7 - discountcoupon
+cd terraform/Quarkus/discountcoupon
+terraform init
+terraform apply -auto-approve
+cd ../../..
+
+# ================================================================================
+
+# Terraform 8 - Kong
 cd terraform/Kong
 terraform init
 terraform apply -auto-approve
@@ -173,7 +206,7 @@ cd ../..
 
 # ================================================================================
 
-# Terraform 8 - Konga
+# Terraform 9 - Konga
 cd terraform/Konga
 terraform init
 terraform apply -auto-approve
@@ -181,7 +214,7 @@ cd ../..
 
 # ================================================================================
 
-# Terraform 9 - Camunda
+# Terraform 10 - Camunda
 cd terraform/Camunda
 terraform init
 terraform apply -auto-approve
