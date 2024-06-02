@@ -75,6 +75,13 @@ if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
 fi
 cd ../../..
 
+cd terraform/Quarkus/selledproduct
+echo "Exporting terraform cross selling addresses..."
+if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
+    export pathSelledProduct="$(terraform state show aws_instance.selledProductQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
+fi
+cd ../../..
+
 cd terraform/Kong
 echo "Exporting terraform kong addresses..."
 if [ -d "$TERRAFORM_STATE_FOLDER" ]; then

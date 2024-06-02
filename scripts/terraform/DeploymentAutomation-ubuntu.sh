@@ -133,7 +133,7 @@ if [ -n "$ZSH_VERSION" ]; then
     setopt KSH_ARRAYS
 fi
 
-services=("purchase" "customer" "shop" "loyaltycard" "discountcoupon" "crossselling")
+services=("purchase" "customer" "shop" "loyaltycard" "discountcoupon" "crossselling" "selledproduct")
 
 # Loop through the list of microservices and provision them
 for ((index = 0; index < ${#services[@]}; index++)); do

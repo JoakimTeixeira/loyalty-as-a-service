@@ -47,6 +47,10 @@ echo "MICROSERVICE crossselling IS AVAILABLE HERE:"
 echo "http://${pathCrossSelling}:8080/q/swagger-ui/"
 echo
 
+echo "MICROSERVICE selledproduct IS AVAILABLE HERE:"
+echo "http://${pathSelledProduct}:8080/q/swagger-ui/"
+echo
+
 echo "KONG IS AVAILABLE HERE:"
 echo "http://${pathKongKongaCamunda}:8001/"
 echo

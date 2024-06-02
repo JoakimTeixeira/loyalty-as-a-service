@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Variables
-SERVICES=("purchase" "customer" "shop" "loyaltycard" "discountcoupon" "crossselling")
+SERVICES=("purchase" "customer" "shop" "loyaltycard" "discountcoupon" "crossselling" "selledproduct")
 TAG="1.0.0-SNAPSHOT"
 
 echo "Removing Docker images..."

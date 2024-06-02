@@ -180,3 +180,50 @@ curl -s -X GET \
 curl -s -X DELETE \
   --url "${KONG_SERVER_ADDRESS}:8000/1" \
   --header "Host: servercrossselling.com"
+
+# ===================================================================
+
+# == SELLED PRODUCT ==
+
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8000/Consume" \
+  --header "Host: serverselledproduct.com" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "topicName": "SelledProduct-Lisboa"
+}'
+
+curl -s -X GET \
+  --url "${KONG_SERVER_ADDRESS}:8000" \
+  --header "Host: serverselledproduct.com"
+
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8000" \
+  --header "Host: serverselledproduct.com" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "topic": {
+    "topicName": "SelledProduct-Lisboa"
+  },
+  "product": {
+    "id": 0,
+    "couponId": 2,
+    "productsSelledByCoupon": 128,
+    "shopId": 4,
+    "productsSelledByShop": 14,
+    "shopLocation": "Lisboa",
+    "productsSelledByLocation": 356,
+    "loyaltyCardId": 7,
+    "productsSelledByLoyaltyCard": 55,
+    "customerId": 1,
+    "productsSelledByCustomer": 38
+  }
+}'
+
+curl -s -X GET \
+  --url "${KONG_SERVER_ADDRESS}:8000/1" \
+  --header "Host: serverselledproduct.com"
+
+curl -s -X DELETE \
+  --url "${KONG_SERVER_ADDRESS}:8000/1" \
+  --header "Host: serverselledproduct.com"

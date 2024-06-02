@@ -48,6 +48,7 @@ terraform_modules=(
     "terraform/Quarkus/loyaltycard:quarkus/loyaltycard"
     "terraform/Quarkus/discountcoupon:quarkus/discountcoupon"
     "terraform/Quarkus/crossselling:quarkus/crossselling"
+    "terraform/Quarkus/selledproduct:quarkus/selledproduct"
     "terraform/Kong:kongKongaCamunda"
 )
 

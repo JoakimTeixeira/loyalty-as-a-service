@@ -12,6 +12,7 @@ export CUSTOMER_URL="http://${pathCustomer}:8080/Customer"
 export LOYALTYCARD_URL="http://${pathLoyaltyCard}:8080/LoyaltyCard"
 export DISCOUNTCOUPON_URL="http://${pathDiscountCoupon}:8080/DiscountCoupon"
 export CROSSSELLING_URL="http://${pathCrossSelling}:8080/CrossSelling"
+export SELLEDPRODUCT_URL="http://${pathSelledProduct}:8080/SelledProduct"
 
 create_service() {
   local service_name=$1
@@ -113,4 +114,10 @@ fi
 if [ -n "$pathCrossSelling" ]; then
   create_service "crossselling-service" "${CROSSSELLING_URL}"
   create_route "crossselling-service" "servercrossselling.com"
+fi
+
+# == SELLED PRODUCT ==
+if [ -n "$pathSelledProduct" ]; then
+  create_service "selledproduct-service" "${SELLEDPRODUCT_URL}"
+  create_route "selledproduct-service" "serverselledproduct.com"
 fi

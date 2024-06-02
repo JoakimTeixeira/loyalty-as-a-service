@@ -64,6 +64,13 @@ if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
 fi
 cd ../../..
 
+# Quarkus selledproduct
+cd terraform/Quarkus/selledproduct
+if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
+    terraform destroy -auto-approve
+fi
+cd ../../..
+
 # Kong, Konga and Camunda
 cd terraform/Kong
 if [ -d "$TERRAFORM_STATE_FOLDER" ]; then

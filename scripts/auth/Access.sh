@@ -23,7 +23,7 @@ export DOCKERHUB_PASSWORD=''
 export DB_USERNAME=''
 export DB_PASSWORD=''
 export DB_NAME='quarkus_test_all_operations'
-export DB_INSTANCES=6
+export DB_INSTANCES=7
 
 # ================================================================================
 

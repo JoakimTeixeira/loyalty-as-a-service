@@ -68,6 +68,7 @@ clean_microservice "microservices/customer"
 clean_microservice "microservices/loyaltycard"
 clean_microservice "microservices/discountcoupon"
 clean_microservice "microservices/crossselling"
+clean_microservice "microservices/selledproduct"
 clean_bpmn "bpmn"
 clean_postman "bpmn/tests"
 
