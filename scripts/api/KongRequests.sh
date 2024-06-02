@@ -102,3 +102,42 @@ curl -i -X PUT \
   --url "${KONG_SERVER_ADDRESS}:8000/1/2/3" \
   --header "Host: serverloyaltycard.com" \
   --header "Content-Type: application/json"
+
+# ===================================================================
+
+# == DISCOUNT COUPON ==
+
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8000/Consume" \
+  --header "Host: serverdiscountcoupon.com" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "topicName": "Discount-1-5"
+}'
+
+curl -s -X GET \
+  --url "${KONG_SERVER_ADDRESS}:8000" \
+  --header "Host: serverdiscountcoupon.com" | python3 -m json.tool
+
+curl -i -X POST \
+  --url "${KONG_SERVER_ADDRESS}:8000" \
+  --header "Host: serverdiscountcoupon.com" \
+  --header "Content-Type: application/json" \
+  --data '{
+  "topic": {
+    "topicName": "Discount-1-5"
+  },
+  "coupon": {
+    "id": 0,
+    "discount": "30% off",
+    "expiryDate": "2020-01-01"
+  }
+}'
+
+curl -s -X GET \
+  --url "${KONG_SERVER_ADDRESS}:8000/1" \
+  --header "Host: serverdiscountcoupon.com" | python3 -m json.tool
+
+curl -s -X DELETE \
+  --url "${KONG_SERVER_ADDRESS}:8000/1" \
+  --header "Host: serverdiscountcoupon.com" | python3 -m json.tool
