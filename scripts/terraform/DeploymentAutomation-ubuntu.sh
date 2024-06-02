@@ -43,18 +43,9 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-# Builds the Docker image or skips if it already exists in Docker Hub
-if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/purchase/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
-    echo
-    echo "Docker image not found in Docker Hub. Building package..."
-    cd ../../..
-    ./mvnw clean package
-    cd ../..
-else
-    echo
-    echo "Docker image already exists in Docker Hub. Skipping build..."
-    cd ../../../../..
-fi
+cd ../../..
+./mvnw clean package
+cd ../..
 
 # Terraform 3 - Purchase
 cd terraform/Quarkus/Purchase
@@ -76,18 +67,9 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-# Builds the Docker image or skips if it already exists in Docker Hub
-if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/loyaltycard/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
-    echo
-    echo "Docker image not found in Docker Hub. Building package..."
-    cd ../../..
-    ./mvnw clean package
-    cd ../..
-else
-    echo
-    echo "Docker image already exists in Docker Hub. Skipping build..."
-    cd ../../../../..
-fi
+cd ../../..
+./mvnw clean package
+cd ../..
 
 # Terraform 4 - loyaltycard
 cd terraform/Quarkus/loyaltycard
@@ -109,18 +91,9 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-# Builds the Docker image or skips if it already exists in Docker Hub
-if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/customer/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
-    echo
-    echo "Docker image not found in Docker Hub. Building package..."
-    cd ../../..
-    ./mvnw clean package
-    cd ../..
-else
-    echo
-    echo "Docker image already exists in Docker Hub. Skipping build..."
-    cd ../../../../..
-fi
+cd ../../..
+./mvnw clean package
+cd ../..
 
 # Terraform 5 - customer
 cd terraform/Quarkus/customer
@@ -142,18 +115,9 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-# Builds the Docker image or skips if it already exists in Docker Hub
-if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/shop/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
-    echo
-    echo "Docker image not found in Docker Hub. Building package..."
-    cd ../../..
-    ./mvnw clean package
-    cd ../..
-else
-    echo
-    echo "Docker image already exists in Docker Hub. Skipping build..."
-    cd ../../../../..
-fi
+cd ../../..
+./mvnw clean package
+cd ../..
 
 # Terraform 6 - shop
 cd terraform/Quarkus/shop
@@ -175,18 +139,10 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-# Builds the Docker image or skips if it already exists in Docker Hub
-if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/discountcoupon/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
-    echo
-    echo "Docker image not found in Docker Hub. Building package..."
-    cd ../../..
-    ./mvnw clean package
-    cd ../..
-else
-    echo
-    echo "Docker image already exists in Docker Hub. Skipping build..."
-    cd ../../../../..
-fi
+cd ../../..
+./mvnw clean package
+cd ../..
+e
 
 # Terraform 7 - discountcoupon
 cd terraform/Quarkus/discountcoupon
@@ -208,18 +164,9 @@ sed -i 's/^quarkus\.datasource\.reactive\.url=.*/quarkus.datasource.reactive.url
 # # Finds line starting with "kafka.bootstrap.servers=" and replaces anything after it with "$addresskafka:9092"
 sed -i 's/^kafka\.bootstrap\.servers=.*/kafka.bootstrap.servers='"$addresskafka"':9092/' application.properties
 
-# Builds the Docker image or skips if it already exists in Docker Hub
-if ! curl -s -f -lSL "https://hub.docker.com/v2/repositories/${TF_VAR_dockerhub_username}/crossselling/tags/1.0.0-SNAPSHOT" >/dev/null 2>&1; then
-    echo
-    echo "Docker image not found in Docker Hub. Building package..."
-    cd ../../..
-    ./mvnw clean package
-    cd ../..
-else
-    echo
-    echo "Docker image already exists in Docker Hub. Skipping build..."
-    cd ../../../../..
-fi
+cd ../../..
+./mvnw clean package
+cd ../..
 
 # Terraform 8 - crossselling
 cd terraform/Quarkus/crossselling
@@ -242,7 +189,15 @@ source scripts/terraform/ExportAddresses.sh
 # ============================ Setup Kong API Gateway ============================
 
 # Wait for Kong to be ready
-sleep 30 && source scripts/api/KongConfiguration.sh
+while ! curl -s "${pathKongKongaCamunda}:8001" >/dev/null; do
+    echo "Waiting for Kong Admin API..."
+    sleep 30
+done
+
+echo "Starting Kong services and routes configuration..."
+echo
+
+source scripts/api/KongConfiguration.sh
 
 # =============================== Update Bpmn Files ==============================
 
