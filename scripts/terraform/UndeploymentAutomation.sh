@@ -40,17 +40,22 @@ cd terraform/Quarkus/discountcoupon
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 8 - Kong
+# Terraform 8 - Quarkus crossselling
+cd terraform/Quarkus/crossselling
+terraform destroy -auto-approve
+cd ../../..
+
+# Terraform 9 - Kong
 cd terraform/Kong
 terraform destroy -auto-approve
 cd ../..
 
-# Terraform 9 - Konga
+# Terraform 10 - Konga
 cd terraform/Konga
 terraform destroy -auto-approve
 cd ../..
 
-# Terraform 10 - Camunda
+# Terraform 11 - Camunda
 cd terraform/Camunda
 terraform destroy -auto-approve
 cd ../..
