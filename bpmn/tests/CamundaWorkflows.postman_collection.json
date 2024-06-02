@@ -2712,6 +2712,814 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Cross Selling",
+      "item": [
+        {
+          "name": "Deploy Workflow",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "})",
+                  "",
+                  "pm.test('Content-Type header is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "pm.test('Response has the required fields', function () {",
+                  "    const responseData = pm.response.json();",
+                  "",
+                  "    pm.expect(responseData).to.have.property('id').that.is.not.empty;",
+                  "    pm.expect(responseData).to.have.property('name').that.equals('Cross Selling Workflow');",
+                  "    pm.expect(responseData).to.have.property('source').that.equals('Postman');",
+                  "    pm.expect(responseData).to.have.property('deployedProcessDefinitions').that.is.an('object');",
+                  "",
+                  "    const deployedProcessDefinitions = responseData.deployedProcessDefinitions;",
+                  "    pm.expect(Object.keys(deployedProcessDefinitions)).to.not.be.empty;",
+                  "",
+                  "     const expectedDefinitions = [",
+                  "        { key: 'CrossSellingManagementCreation', resource: 'CrossSellingManagement.bpmn' },",
+                  "    ];",
+                  "",
+                  "    expectedDefinitions.forEach(expected => {",
+                  "        const processDefinition = Object.values(deployedProcessDefinitions).find(def => def.key === expected.key);",
+                  "        pm.expect(processDefinition).to.have.property('key').that.equals(expected.key);",
+                  "        pm.expect(processDefinition).to.have.property('resource').that.equals(expected.resource);",
+                  "    });",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "deployment-name",
+                  "value": "Cross Selling Workflow",
+                  "type": "text"
+                },
+                {
+                  "key": "deployment-source",
+                  "value": "Postman",
+                  "type": "text"
+                },
+                {
+                  "key": "data",
+                  "type": "file",
+                  "src": "/home/joka/Pictures/loyalty-as-a-service/bpmn/CrossSellingManagement.bpmn"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/deployment/create",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "deployment", "create"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Start Cross Selling Process",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "})",
+                  "",
+                  "pm.test('Content-Type header is application/json', function () {",
+                  "    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "pm.test('Response is a valid object', function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData).to.be.an('object');",
+                  "})",
+                  "",
+                  "pm.test('Response has the required fields', function () {",
+                  "    const responseData = pm.response.json();",
+                  "    pm.expect(responseData).to.include.all.keys('id', 'businessKey', 'tenantId').that.is.not.empty;",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/process-definition/key/{{crossSellingProcessKey}}/start",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": [
+                "{{contextPath}}",
+                "process-definition",
+                "key",
+                "{{crossSellingProcessKey}}",
+                "start"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "const instanceTitle = 'Decide the Data for Cross Selling Creation Order'",
+                  "",
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array that is not empty', function () {",
+                  "    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test('Response has required fields and sets the collection variable', function () {",
+                  "    let found = false;",
+                  "    ",
+                  "    responseData.forEach(response => {        ",
+                  "        if (response.name === instanceTitle) {",
+                  "            pm.expect(response).to.have.property('id').that.is.not.empty;",
+                  "            pm.expect(response).to.have.property('name').that.equals(instanceTitle);",
+                  "            pm.expect(response).to.have.property('assignee').that.equals('demo');",
+                  "            pm.collectionVariables.set(\"instanceId\", response.id);",
+                  "            found = true;",
+                  "        }",
+                  "    });",
+                  "    ",
+                  "    pm.expect(found).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Check if the collection variable is not empty', function () {",
+                  "    pm.expect(pm.collectionVariables.get(\"instanceId\")).to.be.not.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Task: Decide the Data for Cross Selling Creation Order",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Request",
+                  "pm.test('Content-Type header is application/json', function () {",
+                  "    pm.expect(pm.request.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "pm.test('Request body has the correct properties', function () {",
+                  "    const requestBody = JSON.parse(pm.request.body.raw);",
+                  "",
+                  "    pm.expect(requestBody).to.have.property('variables').that.is.an('object').that.is.not.empty;",
+                  "",
+                  "    function findByKey(key) {",
+                  "        return requestBody.variables[key];",
+                  "    }",
+                  "",
+                  "    const object = findByKey('LoyaltyCardID');",
+                  "    pm.expect(object).to.be.an('object').that.is.not.empty;",
+                  "    pm.expect(object).to.have.property('value').that.is.a('string').that.is.not.empty;",
+                  "    pm.expect(object).to.have.property('type').that.equals('string');",
+                  "});",
+                  "",
+                  "// Response",
+                  "pm.test('Response status code is 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"variables\": {\n        \"LoyaltyCardID\": {\n            \"value\": \"1\",\n            \"type\": \"string\"\n        }\n    }\n}\n"
+            },
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task/{{instanceId}}/complete",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task", "{{instanceId}}", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "const instanceTitle = 'Verify if Order is Possible'",
+                  "",
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array that is not empty', function () {",
+                  "    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test('Response has required fields and sets the collection variable', function () {",
+                  "    let found = false;",
+                  "    ",
+                  "    responseData.forEach(response => {        ",
+                  "        if (response.name === instanceTitle) {",
+                  "            pm.expect(response).to.have.property('id').that.is.not.empty;",
+                  "            pm.expect(response).to.have.property('name').that.equals(instanceTitle);",
+                  "            pm.expect(response).to.have.property('assignee').that.equals('demo');",
+                  "            pm.collectionVariables.set(\"instanceId\", response.id);",
+                  "            found = true;",
+                  "        }",
+                  "    });",
+                  "    ",
+                  "    pm.expect(found).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Check if the collection variable is not empty', function () {",
+                  "    pm.expect(pm.collectionVariables.get(\"instanceId\")).to.be.not.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Task: Verify if Order is Possible",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Request",
+                  "pm.test('Content-Type header is application/json', function () {",
+                  "    pm.expect(pm.request.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "pm.test('Request body has the correct properties', function () {",
+                  "    const requestBody = JSON.parse(pm.request.body.raw);",
+                  "",
+                  "    pm.expect(requestBody).to.have.property('variables').that.is.an('object').that.is.not.empty;",
+                  "",
+                  "    function findByKey(key) {",
+                  "        return requestBody.variables[key];",
+                  "    }",
+                  "",
+                  "    const object = findByKey('isPossible');",
+                  "    pm.expect(object).to.be.an('object').that.is.not.empty;",
+                  "    pm.expect(object).to.have.property('value').that.is.a('boolean');",
+                  "    pm.expect(object).to.have.property('type').that.equals('boolean');",
+                  "});",
+                  "",
+                  "// Response",
+                  "pm.test('Response status code is 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "})",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"variables\": {\n        \"isPossible\": {\n            \"value\": true,\n            \"type\": \"boolean\"\n            }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task/{{instanceId}}/complete",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task", "{{instanceId}}", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "const instanceTitle = 'Check Cross Selling Consumer Order'",
+                  "",
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array that is not empty', function () {",
+                  "    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test('Response has required fields and sets the collection variable', function () {",
+                  "    let found = false;",
+                  "    ",
+                  "    responseData.forEach(response => {        ",
+                  "        if (response.name === instanceTitle) {",
+                  "            pm.expect(response).to.have.property('id').that.is.not.empty;",
+                  "            pm.expect(response).to.have.property('name').that.equals(instanceTitle);",
+                  "            pm.expect(response).to.have.property('assignee').that.equals('demo');",
+                  "            pm.collectionVariables.set(\"instanceId\", response.id);",
+                  "            found = true;",
+                  "        }",
+                  "    });",
+                  "    ",
+                  "    pm.expect(found).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Check if the collection variable is not empty', function () {",
+                  "    pm.expect(pm.collectionVariables.get(\"instanceId\")).to.be.not.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Task: Check Cross Selling Consumer Order",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Request",
+                  "pm.test('Content-Type header is application/json', function () {",
+                  "    pm.expect(pm.request.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "pm.test('Request body has the correct properties', function () {",
+                  "    const requestBody = JSON.parse(pm.request.body.raw);",
+                  "",
+                  "    pm.expect(requestBody).to.have.property('variables').that.is.an('object').that.is.not.empty;",
+                  "",
+                  "    function findByKey(key) {",
+                  "        return requestBody.variables[key];",
+                  "    }",
+                  "",
+                  "    const object = findByKey('productOk');",
+                  "    pm.expect(object).to.be.an('object').that.is.not.empty;",
+                  "    pm.expect(object).to.have.property('value').that.is.a('boolean');",
+                  "    pm.expect(object).to.have.property('type').that.equals('boolean');",
+                  "});",
+                  "",
+                  "// Response",
+                  "pm.test('Response status code is 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "})",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"variables\": {\n        \"productOk\": {\n            \"value\": true,\n            \"type\": \"boolean\"\n        }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task/{{instanceId}}/complete",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task", "{{instanceId}}", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "const instanceTitle = 'Verify if Cross Selling Creation is Possible'",
+                  "",
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array that is not empty', function () {",
+                  "    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test('Response has required fields and sets the collection variable', function () {",
+                  "    let found = false;",
+                  "    ",
+                  "    responseData.forEach(response => {        ",
+                  "        if (response.name === instanceTitle) {",
+                  "            pm.expect(response).to.have.property('id').that.is.not.empty;",
+                  "            pm.expect(response).to.have.property('name').that.equals(instanceTitle);",
+                  "            pm.expect(response).to.have.property('assignee').that.equals('demo');",
+                  "            pm.collectionVariables.set(\"instanceId\", response.id);",
+                  "            found = true;",
+                  "        }",
+                  "    });",
+                  "    ",
+                  "    pm.expect(found).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Check if the collection variable is not empty', function () {",
+                  "    pm.expect(pm.collectionVariables.get(\"instanceId\")).to.be.not.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Task: Verify if Cross Selling Creation is Possible",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Request",
+                  "pm.test('Content-Type header is application/json', function () {",
+                  "    pm.expect(pm.request.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "pm.test('Request body has the correct properties', function () {",
+                  "    const requestBody = JSON.parse(pm.request.body.raw);",
+                  "",
+                  "    pm.expect(requestBody).to.have.property('variables').that.is.an('object').that.is.not.empty;",
+                  "",
+                  "    function findByKey(key) {",
+                  "        return requestBody.variables[key];",
+                  "    }",
+                  "",
+                  "    const object = findByKey('isThereAPartnerShop');",
+                  "    pm.expect(object).to.be.an('object').that.is.not.empty;",
+                  "    pm.expect(object).to.have.property('value').that.is.a('boolean');",
+                  "    pm.expect(object).to.have.property('type').that.equals('boolean');",
+                  "});",
+                  "",
+                  "// Response",
+                  "pm.test('Response status code is 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "})",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"variables\": {\n        \"isThereAPartnerShop\": {\n            \"value\": true,\n            \"type\": \"boolean\"\n            }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task/{{instanceId}}/complete",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task", "{{instanceId}}", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Task ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "const instanceTitle = 'Check Cross Selling Creation'",
+                  "",
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array that is not empty', function () {",
+                  "    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test('Response has required fields and sets the collection variable', function () {",
+                  "    let found = false;",
+                  "    ",
+                  "    responseData.forEach(response => {        ",
+                  "        if (response.name === instanceTitle) {",
+                  "            pm.expect(response).to.have.property('id').that.is.not.empty;",
+                  "            pm.expect(response).to.have.property('name').that.equals(instanceTitle);",
+                  "            pm.expect(response).to.have.property('assignee').that.equals('demo');",
+                  "            pm.collectionVariables.set(\"instanceId\", response.id);",
+                  "            found = true;",
+                  "        }",
+                  "    });",
+                  "    ",
+                  "    pm.expect(found).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Check if the collection variable is not empty', function () {",
+                  "    pm.expect(pm.collectionVariables.get(\"instanceId\")).to.be.not.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Task: Check Cross Selling Creation",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Request",
+                  "pm.test('Content-Type header is application/json', function () {",
+                  "    pm.expect(pm.request.headers.get('Content-Type')).to.include('application/json');",
+                  "});",
+                  "",
+                  "pm.test('Request body has the correct properties', function () {",
+                  "    const requestBody = JSON.parse(pm.request.body.raw);",
+                  "",
+                  "    pm.expect(requestBody).to.have.property('variables').that.is.an('object').that.is.not.empty;",
+                  "",
+                  "    function findByKey(key) {",
+                  "        return requestBody.variables[key];",
+                  "    }",
+                  "",
+                  "    const object = findByKey('isCreatedCorrectly');",
+                  "    pm.expect(object).to.be.an('object').that.is.not.empty;",
+                  "    pm.expect(object).to.have.property('value').that.is.a('boolean');",
+                  "    pm.expect(object).to.have.property('type').that.equals('boolean');",
+                  "});",
+                  "",
+                  "// Response",
+                  "pm.test('Response status code is 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "})",
+                  "",
+                  "",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"variables\": {\n        \"isCreatedCorrectly\": {\n            \"value\": true,\n            \"type\": \"boolean\"\n            }\n    }\n}"
+            },
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/task/{{instanceId}}/complete",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "task", "{{instanceId}}", "complete"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Deployment ID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const responseData = pm.response.json();",
+                  "const instanceTitle = 'Cross Selling Workflow'",
+                  "",
+                  "pm.test('Response status code is 200', function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test('Response is an array that is not empty', function () {",
+                  "    pm.expect(responseData).to.be.an('array').that.is.not.empty;",
+                  "});",
+                  "",
+                  "pm.test('Response has required fields and sets the collection variable', function () {",
+                  "    let found = false;",
+                  "    ",
+                  "    responseData.forEach(response => {        ",
+                  "        if (response.name === instanceTitle) {",
+                  "            pm.expect(response).to.have.property('id').that.is.not.empty;",
+                  "            pm.expect(response).to.have.property('name').that.equals(instanceTitle);",
+                  "            pm.expect(response).to.have.property('source').that.equals('Postman');",
+                  "            pm.collectionVariables.set(\"instanceId\", response.id);",
+                  "            found = true;",
+                  "        }",
+                  "    });",
+                  "    ",
+                  "    pm.expect(found).to.be.true;",
+                  "});",
+                  "",
+                  "pm.test('Check if the collection variable is not empty', function () {",
+                  "    pm.expect(pm.collectionVariables.get(\"instanceId\")).to.be.not.empty;",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/deployment",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "deployment"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Undeploy Workflow",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Query parameter cascade is true', function () {",
+                  "    const queryParams = pm.request.url.query.toObject();",
+                  "    pm.expect(queryParams).to.have.property('cascade', 'true');",
+                  "});",
+                  "",
+                  "pm.test('Response status code is 204', function () {",
+                  "    pm.response.to.have.status(204);",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}:{{port}}/{{contextPath}}/deployment/{{instanceId}}?cascade=true",
+              "host": ["{{host}}"],
+              "port": "{{port}}",
+              "path": ["{{contextPath}}", "deployment", "{{instanceId}}"],
+              "query": [
+                {
+                  "key": "cascade",
+                  "value": "true"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ],
   "auth": {
@@ -2781,6 +3589,11 @@
     {
       "key": "discountCouponProcessKey",
       "value": "DiscountCouponManagementCreation",
+      "type": "string"
+    },
+    {
+      "key": "crossSellingProcessKey",
+      "value": "CrossSellingManagementCreation",
       "type": "string"
     },
     {
