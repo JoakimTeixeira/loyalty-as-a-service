@@ -34,13 +34,19 @@ To get started:
 
 ## To-do
 
-- [ ] Create new microservices
-- [ ] Model BPMN diagrams for new microservices
 - [x] Implement Postman scripts for E2E tests of BPMN diagrams
+- [x] Model BPMN diagrams for new microservices
+- [x] Adapt BPMN diagrams Camunda and microservices communicate through Kong endpoints
+- [x] Automate EC2 URL replacement in BPMN diagrams (XML files) and Postman script
+- [x] Automate Kong routes and servers creation
+- [x] Automate Kong and Konga configuration on docker images
+- [x] Automate Konga UI to initiate with custom admin user + Kong connection
 - [x] Create Kong scripts to serve as API Gateway for the microservices
-- [x] Adapt BPMN diagrams so that Camunda and microservices communicate through Kong endpoints
-- [ ] Update deploy script to leverage multiple Kafka instances
 - [ ] Automate AWS key pairs provisioning
-- [ ] Develop a script to update Zookeeper and Kafka configs on reboot
+- [ ] Implement the "sold product" microservice
 - [ ] Configure terraform state to be backed up in AWS S3
-- [ ] Model architecture diagram for application infrastructure
+- [ ] Make the terraform state detect changes when the Quarkus docker image is created
+- [ ] Remove Quarkus docker images from the local machine and Docker Hub
+- [ ] Avoid creating Kong services and routes again if they already exist
+- [ ] Develop a script to update Zookeeper and Kafka configs on reboot
+- [ ] Update replacement script (sed) to leverage multiple Kafka instances in the same machine
