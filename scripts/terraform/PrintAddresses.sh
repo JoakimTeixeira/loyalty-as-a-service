@@ -8,6 +8,10 @@ source scripts/auth/Access.sh
 
 echo
 
+echo "S3 IS AVAILABLE HERE:"
+echo "${addressS3}"
+echo
+
 echo "RDS IS AVAILABLE HERE:"
 echo "${addressRDS}"
 echo

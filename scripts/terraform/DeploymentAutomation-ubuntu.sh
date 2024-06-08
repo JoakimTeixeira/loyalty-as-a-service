@@ -11,10 +11,23 @@ echo
 
 # ================================================================================
 
-# Key Pair Secrets
-
-cd terraform/Secrets
+# S3 Bucket
+# Should be the first to be created because holds the terraform state from all the resources
+cd terraform/S3
 terraform init
+terraform apply -auto-approve
+cd ../..
+
+# ================================================================================
+
+# Key Pair Secrets
+cd terraform/Secrets
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=secrets/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../..
 
@@ -22,7 +35,12 @@ cd ../..
 
 # RDS
 cd terraform/RDS
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=rds/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 esc=$'\e'
 addressRDS="$(terraform state show aws_db_instance.rds_db | grep address | sed "s/address//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
@@ -32,7 +50,12 @@ cd ../..
 
 # Kafka
 cd terraform/Kafka
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=kafka/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 esc=$'\e'
 # addresskafka2=$(terraform state list 'aws_instance.kafkaCluster' | xargs -I {} terraform state show {} | grep public_dns | awk '{print $3}' | tr -d '"' | paste -sd ',' -)
@@ -59,7 +82,12 @@ cd ../..
 
 # Purchase
 cd terraform/Quarkus/Purchase
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=quarkus/purchase/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../../..
 
@@ -83,7 +111,12 @@ cd ../..
 
 # loyaltycard
 cd terraform/Quarkus/loyaltycard
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=quarkus/loyaltycard/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../../..
 
@@ -107,7 +140,12 @@ cd ../..
 
 # customer
 cd terraform/Quarkus/customer
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=quarkus/customer/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../../..
 
@@ -131,7 +169,12 @@ cd ../..
 
 # shop
 cd terraform/Quarkus/shop
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=quarkus/shop/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../../..
 
@@ -156,7 +199,12 @@ e
 
 # discountcoupon
 cd terraform/Quarkus/discountcoupon
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=quarkus/discountcoupon/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../../..
 
@@ -180,7 +228,12 @@ cd ../..
 
 # crossselling
 cd terraform/Quarkus/crossselling
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=quarkus/crossselling/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../../..
 
@@ -188,7 +241,12 @@ cd ../../..
 
 # Kong, Konga and Camunda
 cd terraform/Kong
-terraform init
+terraform init \
+    -backend-config="bucket=${TF_VAR_s3_bucket_name}" \
+    -backend-config="key=kongKongaCamunda/terraform.tfstate" \
+    -backend-config="region=${TF_VAR_aws_region}" \
+    -backend-config="dynamodb_table=${TF_VAR_dynamodb_table_name}" \
+    -backend-config="encrypt=true"
 terraform apply -auto-approve
 cd ../..
 

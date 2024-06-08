@@ -15,6 +15,11 @@ cd terraform/RDS
 terraform destroy -auto-approve
 cd ../..
 
+# S3 Bucket
+cd terraform/S3
+terraform destroy -auto-approve
+cd ../..
+
 # Kafka
 cd terraform/Kafka
 terraform destroy -auto-approve
@@ -52,5 +57,11 @@ cd ../../..
 
 # Kong, Konga and Camunda
 cd terraform/Kong
+terraform destroy -auto-approve
+cd ../..
+
+# S3 Bucket
+# Should be the last to be destroyed because holds the terraform state from all the resources
+cd terraform/S3
 terraform destroy -auto-approve
 cd ../..

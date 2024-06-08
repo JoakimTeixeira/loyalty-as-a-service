@@ -42,7 +42,7 @@ To get started:
 - [x] Create Kong scripts to serve as API Gateway for the microservices
 - [x] Automate AWS key pairs provisioning
 - [ ] Implement the "sold product" microservice
-- [ ] Configure terraform state to be backed up in AWS S3
+- [x] Configure terraform state to be backed up in AWS S3
 - [ ] Make the terraform state detect changes when the Quarkus docker image is created
 - [ ] Remove Quarkus docker images from the local machine and Docker Hub
 - [ ] Avoid creating Kong services and routes again if they already exist

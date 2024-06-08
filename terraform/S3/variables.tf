@@ -1,5 +1,5 @@
-variable "key_pair_name" {
-  description = "The name of the key pair"
+variable "aws_region" {
+  description = "The AWS region to use"
   type        = string
 }
 
@@ -12,3 +12,4 @@ variable "dynamodb_table_name" {
   description = "The name of the DynamoDB table"
   type        = string
 }
+
