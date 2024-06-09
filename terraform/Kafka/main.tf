@@ -1,11 +1,10 @@
 resource "aws_instance" "kafkaCluster" {
   ami           = "ami-0cf10cdf9fcd62d37"
   instance_type = "t2.small"
-
-  count = var.nBroker
+  count         = var.nBroker
 
   vpc_security_group_ids = [aws_security_group.instance.id]
-  key_name               = "vockey"
+  key_name               = var.key_pair_name
 
   user_data = base64encode(templatefile("creation.sh", {
     idBroker     = "${count.index + 1}"
@@ -21,7 +20,7 @@ resource "aws_instance" "kafkaCluster" {
   connection {
     type        = "ssh"
     user        = "ec2-user"
-    private_key = file("vockey.pem")
+    private_key = data.aws_secretsmanager_secret_version.private_key_version.secret_string
     host        = self.public_dns
   }
 
@@ -40,7 +39,7 @@ resource "null_resource" "configure_kafka_and_zookeeper" {
     type        = "ssh"
     host        = element(aws_instance.kafkaCluster[*].public_dns, count.index)
     user        = "ec2-user"
-    private_key = file("vockey.pem")
+    private_key = data.aws_secretsmanager_secret_version.private_key_version.secret_string
   }
 
   provisioner "remote-exec" {
@@ -51,7 +50,6 @@ resource "null_resource" "configure_kafka_and_zookeeper" {
     ]
   }
 }
-
 
 resource "aws_security_group" "instance" {
   name = var.security_group_name
@@ -107,4 +105,3 @@ resource "aws_security_group" "instance" {
     ipv6_cidr_blocks = ["::/0"]
   }
 }
-

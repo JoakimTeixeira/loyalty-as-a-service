@@ -11,7 +11,16 @@ echo
 
 # ================================================================================
 
-# Terraform 1 - RDS
+# Key Pair Secrets
+
+cd terraform/Secrets
+terraform init
+terraform apply -auto-approve
+cd ../..
+
+# ================================================================================
+
+# RDS
 cd terraform/RDS
 terraform init
 terraform apply -auto-approve
@@ -21,7 +30,7 @@ cd ../..
 
 # ================================================================================
 
-# Terraform 2 - Kafka
+# Kafka
 cd terraform/Kafka
 terraform init
 terraform apply -auto-approve
@@ -48,7 +57,7 @@ cd ../../..
 ./mvnw clean package
 cd ../..
 
-# Terraform 3 - Purchase
+# Purchase
 cd terraform/Quarkus/Purchase
 terraform init
 terraform apply -auto-approve
@@ -72,7 +81,7 @@ cd ../../..
 ./mvnw clean package
 cd ../..
 
-# Terraform 4 - loyaltycard
+# loyaltycard
 cd terraform/Quarkus/loyaltycard
 terraform init
 terraform apply -auto-approve
@@ -96,7 +105,7 @@ cd ../../..
 ./mvnw clean package
 cd ../..
 
-# Terraform 5 - customer
+# customer
 cd terraform/Quarkus/customer
 terraform init
 terraform apply -auto-approve
@@ -120,7 +129,7 @@ cd ../../..
 ./mvnw clean package
 cd ../..
 
-# Terraform 6 - shop
+# shop
 cd terraform/Quarkus/shop
 terraform init
 terraform apply -auto-approve
@@ -145,7 +154,7 @@ cd ../../..
 cd ../..
 e
 
-# Terraform 7 - discountcoupon
+# discountcoupon
 cd terraform/Quarkus/discountcoupon
 terraform init
 terraform apply -auto-approve
@@ -169,7 +178,7 @@ cd ../../..
 ./mvnw clean package
 cd ../..
 
-# Terraform 8 - crossselling
+# crossselling
 cd terraform/Quarkus/crossselling
 terraform init
 terraform apply -auto-approve
@@ -177,7 +186,7 @@ cd ../../..
 
 # ================================================================================
 
-# Terraform 9 - Kong, Konga and Camunda
+# Kong, Konga and Camunda
 cd terraform/Kong
 terraform init
 terraform apply -auto-approve

@@ -5,47 +5,52 @@ cd "$BASE_DIR"
 
 source scripts/auth/Access.sh
 
-# Terraform 1 - RDS
+# Key Pair Secrets
+cd terraform/Secrets
+terraform destroy -auto-approve
+cd ../..
+
+# RDS
 cd terraform/RDS
 terraform destroy -auto-approve
 cd ../..
 
-# Terraform 2 - Kafka
+# Kafka
 cd terraform/Kafka
 terraform destroy -auto-approve
 cd ../..
 
-# Terraform 3 - Quarkus Purchase
+# Quarkus Purchase
 cd terraform/Quarkus/Purchase
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 4 - Quarkus customer
+# Quarkus customer
 cd terraform/Quarkus/customer
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 5 - Quarkus shop
+# Quarkus shop
 cd terraform/Quarkus/shop
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 6 - Quarkus loyaltycard
+# Quarkus loyaltycard
 cd terraform/Quarkus/loyaltycard
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 7 - Quarkus discountcoupon
+# Quarkus discountcoupon
 cd terraform/Quarkus/discountcoupon
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 8 - Quarkus crossselling
+# Quarkus crossselling
 cd terraform/Quarkus/crossselling
 terraform destroy -auto-approve
 cd ../../..
 
-# Terraform 9 - Kong, Konga and Camunda
+# Kong, Konga and Camunda
 cd terraform/Kong
 terraform destroy -auto-approve
 cd ../..

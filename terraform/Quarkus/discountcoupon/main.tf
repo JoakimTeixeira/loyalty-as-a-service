@@ -6,7 +6,7 @@ resource "aws_instance" "discountCouponQuarkus" {
   # alternative instance_type for Amazon Linux x86 built by Amazon Web Services  
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.instance.id]
-  key_name               = "vockey"
+  key_name               = var.key_pair_name
 
   user_data = base64encode(templatefile("./quarkus.sh", {
     dockerhub_username = "${var.dockerhub_username}",

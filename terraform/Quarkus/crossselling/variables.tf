@@ -1,3 +1,8 @@
+variable "key_pair_name" {
+  description = "The name of the key pair"
+  type        = string
+}
+
 variable "dockerhub_username" {
   description = "Username for Docker Hub"
   type        = string

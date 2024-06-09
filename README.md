@@ -8,15 +8,13 @@ To get started:
 
 1.  Fork the repository and add your AWS and Docker credentials to the environment variables in the `Access.sh` file.
 
-2.  Create an AWS EC2 pair key called `vockey.pem` and move it to the `terraform/Kafka` folder.
-
-3.  This project uses docker to containerize the Quarkus microservices, so log into your docker account with the command:
+2.  This project uses docker to containerize the Quarkus microservices, so log into your docker account with the command:
 
           docker login
 
     Or use the `Docker Desktop` application in your operational system
 
-4.  Then run the following command to provision the AWS resources:
+3.  Then run the following command to provision the AWS resources:
 
           source ./scripts/terraform/DeploymentAutomation-ubuntu.sh
 
@@ -28,7 +26,7 @@ To get started:
 
           source ./scripts/auth/CleanAllProjects.sh
 
-5.  Camunda is responsible for orchestrating the business logic of the application. To deploy the Camunda BPMN files, open the Camunda Modeler program and enter this URL as the deployment URL:
+4.  Camunda is responsible for orchestrating the business logic of the application. To deploy the Camunda BPMN files, open the Camunda Modeler program and enter this URL as the deployment URL:
 
             http://<CAMUNDA-AWS-EC2-PUBLIC-DNS>:8080/engine-rest/deployment/create
 
@@ -42,7 +40,7 @@ To get started:
 - [x] Automate Kong and Konga configuration on docker images
 - [x] Automate Konga UI to initiate with custom admin user + Kong connection
 - [x] Create Kong scripts to serve as API Gateway for the microservices
-- [ ] Automate AWS key pairs provisioning
+- [x] Automate AWS key pairs provisioning
 - [ ] Implement the "sold product" microservice
 - [ ] Configure terraform state to be backed up in AWS S3
 - [ ] Make the terraform state detect changes when the Quarkus docker image is created

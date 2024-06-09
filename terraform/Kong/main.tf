@@ -2,7 +2,7 @@ resource "aws_instance" "installKongKongaCamunda" {
   ami                    = "ami-0b5eea76982371e91"
   instance_type          = "t2.small"
   vpc_security_group_ids = [aws_security_group.instance.id]
-  key_name               = "vockey"
+  key_name               = var.key_pair_name
 
   user_data = file("deploy.sh")
 
