@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 cd "$BASE_DIR"
 
 # Accesses the "pathKongKongaCamunda" variable exported by ExportAddresses.sh after running DeploymentAutomation-ubuntu.sh

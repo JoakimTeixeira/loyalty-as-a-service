@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")")
+BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 cd "$BASE_DIR"
 
 # Make sure the terraform credentials sources are available
