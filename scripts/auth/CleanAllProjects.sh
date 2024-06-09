@@ -14,8 +14,11 @@ if [ -f "$ACCESS_PATH" ]; then
     sed -i "s/^aws_access_key_id=.*/aws_access_key_id=''/g" "$ACCESS_PATH"
     sed -i "s/^aws_secret_access_key=.*/aws_secret_access_key=''/g" "$ACCESS_PATH"
     sed -i "s/^aws_session_token=.*/aws_session_token=''/g" "$ACCESS_PATH"
-    sed -i "s/^export TF_VAR_dockerhub_username=.*/export TF_VAR_dockerhub_username=''/g" "$ACCESS_PATH"
-    sed -i "s/^export TF_VAR_dockerhub_password=.*/export TF_VAR_dockerhub_password=''/g" "$ACCESS_PATH"
+    sed -i "s/^export DOCKERHUB_USERNAME=.*/export DOCKERHUB_USERNAME=''/g" "$ACCESS_PATH"
+    sed -i "s/^export DOCKERHUB_PASSWORD=.*/export DOCKERHUB_PASSWORD=''/g" "$ACCESS_PATH"
+    sed -i "s/^export DB_USERNAME=.*/export DB_USERNAME=''/g" "$ACCESS_PATH"
+    sed -i "s/^export DB_PASSWORD=.*/export DB_PASSWORD=''/g" "$ACCESS_PATH"
+    sed -i "s/^export DB_NAME=.*/export DB_NAME=''/g" "$ACCESS_PATH"
 else
     echo "Warning: $ACCESS_PATH not found."
 fi

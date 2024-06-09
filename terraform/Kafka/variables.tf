@@ -1,3 +1,8 @@
+variable "aws_region" {
+  description = "The AWS region to use"
+  type        = string
+}
+
 data "aws_secretsmanager_secret" "private_key" {
   name = var.key_pair_name
 }
