@@ -43,7 +43,7 @@ To get started:
 - [x] Automate AWS key pairs provisioning
 - [ ] Implement the "sold product" microservice
 - [x] Configure terraform state to be backed up in AWS S3
-- [ ] Make the terraform state detect changes when the Quarkus docker image is created
+- [x] Make the terraform state detect changes when the Quarkus docker image is created
 - [ ] Remove Quarkus docker images from the local machine and Docker Hub
 - [ ] Avoid creating Kong services and routes again if they already exist
 - [ ] Develop a script to update Zookeeper and Kafka configs on reboot

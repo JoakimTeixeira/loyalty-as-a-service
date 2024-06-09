@@ -11,4 +11,6 @@ sudo docker pull "${dockerhub_username}/shop:1.0.0-SNAPSHOT"
 
 sudo docker run -d --name shop -p 8080:8080 "${dockerhub_username}/shop:1.0.0-SNAPSHOT"
 
+echo "The docker image hash is: ${dockerhub_image_hash}"
+
 echo "Finished."

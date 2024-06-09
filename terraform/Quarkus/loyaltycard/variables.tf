@@ -18,6 +18,11 @@ variable "dockerhub_password" {
   type        = string
 }
 
+variable "dockerhub_image_hash" {
+  description = "The hash of the docker image"
+  type        = string
+}
+
 variable "security_group_name" {
   description = "The name of the security group"
   type        = string

@@ -9,8 +9,10 @@ resource "aws_instance" "customerQuarkus" {
   key_name               = var.key_pair_name
 
   user_data = base64encode(templatefile("./quarkus.sh", {
-    dockerhub_username = "${var.dockerhub_username}",
-    dockerhub_password = "${var.dockerhub_password}",
+    dockerhub_username   = "${var.dockerhub_username}",
+    dockerhub_password   = "${var.dockerhub_password}",
+    dockerhub_image_hash = "${var.dockerhub_image_hash}",
+    // When the docker image hash changes, terraform redeploys the EC2 instance
   }))
 
   user_data_replace_on_change = true
