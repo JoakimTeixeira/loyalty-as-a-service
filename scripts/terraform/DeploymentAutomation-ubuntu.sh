@@ -4,6 +4,7 @@ BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 cd "$BASE_DIR"
 
 source scripts/auth/Access.sh
+source scripts/terraform/ExportVariables.sh
 
 echo "Starting deployment..."
 echo
