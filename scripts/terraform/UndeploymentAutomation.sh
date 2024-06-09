@@ -60,6 +60,9 @@ cd terraform/Kong
 terraform destroy -auto-approve
 cd ../..
 
+# All Quarkus Docker Images
+source scripts/terraform/RemoveDockerImages.sh
+
 # S3 Bucket
 # Should be the last to be destroyed because holds the terraform state from all the resources
 cd terraform/S3
