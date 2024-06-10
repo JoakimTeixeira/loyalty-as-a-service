@@ -20,7 +20,7 @@ variable "nBroker" {
 variable "security_group_name" {
   description = "The name of the security group"
   type        = string
-  default     = "terraform-example-instance5"
+  default     = "terraform-kafka"
 }
 
 variable "key_pair_name" {

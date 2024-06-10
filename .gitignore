@@ -10,3 +10,4 @@
 *.tfstate
 *.tfstate.backup
 *.tfstate.lock.*
+backend-config.hcl

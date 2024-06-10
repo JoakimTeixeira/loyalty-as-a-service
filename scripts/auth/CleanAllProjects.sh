@@ -42,7 +42,7 @@ clean_microservice "microservices/Purchase"
 clean_microservice "microservices/shop"
 
 # Remove all compilation files from Terraform
-find . \( -name ".terraform" -o -name ".terraform.tfstate.lock.info" -o -name "terraform.tfstate" -o -name "terraform.tfstate.backup" \) -exec rm -rf {} +
+find . \( -name ".terraform" -o -name "backend-config.hcl" -o -name "errored.tfstate" -o -name ".terraform.tfstate.lock.info" -o -name "terraform.tfstate" -o -name "terraform.tfstate.backup" \) -exec rm -rf {} +
 
 # Remove all compilation files from microservices
 find . \( -name "target" \) -type d -exec rm -rf {} +

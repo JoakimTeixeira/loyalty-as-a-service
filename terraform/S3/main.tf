@@ -1,6 +1,8 @@
 resource "aws_s3_bucket" "terraform_state" {
   bucket        = var.s3_bucket_name
   force_destroy = true // destroy bucket even if it's not empty
+
+  depends_on = [aws_dynamodb_table.terraform_locks]
 }
 
 # Enables state locking for terraform state files with DynamoDB
