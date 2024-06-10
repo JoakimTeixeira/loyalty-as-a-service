@@ -99,4 +99,4 @@ if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
 fi
 cd ../..
 
-source scripts/auth/CleanAllProjects.sh
+source scripts/auth/CleanProject.sh

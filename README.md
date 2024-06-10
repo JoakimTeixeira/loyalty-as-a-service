@@ -24,7 +24,7 @@ To get started:
 
     If you want to remove all your credentials from the project, run the command:
 
-          source ./scripts/auth/CleanAllProjects.sh
+          source ./scripts/auth/CleanProject.sh
 
 4.  Camunda is responsible for orchestrating the business logic of the application. To deploy the Camunda BPMN files, open the Camunda Modeler program and enter this URL as the deployment URL:
 

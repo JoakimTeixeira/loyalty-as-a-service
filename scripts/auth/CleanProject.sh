@@ -4,7 +4,8 @@
 BASE_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)
 cd "$BASE_DIR"
 
-echo "Cleaning all projects..."
+echo
+echo "Cleaning the entire project..."
 echo
 
 ACCESS_PATH="scripts/auth/Access.sh"
@@ -47,5 +48,5 @@ find . \( -name ".terraform" -o -name "backend-config.hcl" -o -name "errored.tfs
 # Remove all compilation files from microservices
 find . \( -name "target" \) -type d -exec rm -rf {} +
 
-echo "All projects were cleaned!"
+echo "Project was cleaned!"
 echo
