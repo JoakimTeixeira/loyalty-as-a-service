@@ -45,6 +45,6 @@ To get started:
 - [x] Configure terraform state to be backed up in AWS S3
 - [x] Make the terraform state detect changes when the Quarkus docker image is created
 - [x] Remove Quarkus docker images from the local machine and Docker Hub
-- [ ] Avoid creating Kong services and routes again if they already exist
+- [x] Avoid creating Kong services and routes again if they already exist
 - [ ] Develop a script to update Zookeeper and Kafka configs on reboot
 - [ ] Update replacement script (sed) to leverage multiple Kafka instances in the same machine
