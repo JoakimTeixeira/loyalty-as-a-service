@@ -41,7 +41,7 @@ To get started:
 - [x] Automate Konga UI to initiate with custom admin user + Kong connection
 - [x] Create Kong scripts to serve as API Gateway for the microservices
 - [x] Automate AWS key pairs provisioning
-- [ ] Implement the "sold product" microservice
+- [x] Implement the "sold product" microservice
 - [x] Configure terraform state to be backed up in AWS S3
 - [x] Make the terraform state detect changes when the Quarkus docker image is created
 - [x] Remove Quarkus docker images from the local machine and Docker Hub

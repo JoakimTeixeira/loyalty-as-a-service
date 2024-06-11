@@ -6,14 +6,14 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.acme.model.Topic;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jakarta.inject.Inject;
 import java.time.Duration;
-import java.util.Collections;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 public class SelledProductConsumer extends Thread {
@@ -33,8 +33,15 @@ public class SelledProductConsumer extends Thread {
         Properties properties = configureKafkaProperties();
         Consumer<String, String> consumer = new KafkaConsumer<>(properties);
 
+        List<String> topics = Arrays.asList(
+                topicName + "-selledByCoupon",
+                topicName + "-selledByShop",
+                topicName + "-selledByLocation",
+                topicName + "-selledByLoyaltyCard",
+                topicName + "-selledByCustomer");
+
         try (consumer) {
-            consumer.subscribe(Collections.singletonList(topicName));
+            consumer.subscribe(topics);
 
             while (!isInterrupted()) {
                 ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
@@ -64,40 +71,44 @@ public class SelledProductConsumer extends Thread {
 
     private void processTopicMessage(ConsumerRecord<String, String> topicMessage) {
         try {
-
             String jsonString = topicMessage.value();
             JSONObject obj = new JSONObject(jsonString);
 
-            final String TOPIC_EVENT_NAME = Topic.getTopicEventName();
+            // The key for the event name inside the JSON object
+            final String TOPIC_EVENT_NAME = "Selled_Product_Event";
 
-            Long couponId = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("couponId");
-            Long productsSelledByCoupon = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("productsSelledByCoupon");
-            Long shopId = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("shopId");
-            Long productsSelledByShop = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("productsSelledByShop");
-            String shopLocation = obj.getJSONObject(TOPIC_EVENT_NAME).getString("shopLocation");
-            Long productsSelledByLocation = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("productsSelledByLocation");
-            Long loyaltyCardId = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("loyaltyCardId");
-            Long productsSelledByLoyaltyCard = obj.getJSONObject(TOPIC_EVENT_NAME)
-                    .getLong("productsSelledByLoyaltyCard");
-            Long customerId = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("customerId");
-            Long productsSelledByCustomer = obj.getJSONObject(TOPIC_EVENT_NAME).getLong("productsSelledByCustomer");
+            // Extracting data from the JSON object
+            Long couponId = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("couponId", -1);
+            Long productsSelledByCoupon = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("productsSelledByCoupon", -1);
+            Long shopId = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("shopId", -1);
+            Long productsSelledByShop = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("productsSelledByShop", -1);
+            String shopLocation = obj.optJSONObject(TOPIC_EVENT_NAME).optString("shopLocation", "");
+            Long productsSelledByLocation = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("productsSelledByLocation", -1);
+            Long loyaltyCardId = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("loyaltyCardId", -1);
+            Long productsSelledByLoyaltyCard = obj.optJSONObject(TOPIC_EVENT_NAME)
+                    .optLong("productsSelledByLoyaltyCard", -1);
+            Long customerId = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("customerId", -1);
+            Long productsSelledByCustomer = obj.optJSONObject(TOPIC_EVENT_NAME).optLong("productsSelledByCustomer", -1);
 
+            // Creating SelledProduct object
             SelledProduct product = new SelledProduct(
-                    couponId,
-                    productsSelledByCoupon,
-                    shopId,
-                    productsSelledByShop,
+                    couponId != -1 ? couponId : null,
+                    productsSelledByCoupon != -1 ? productsSelledByCoupon : null,
+                    shopId != -1 ? shopId : null,
+                    productsSelledByShop != -1 ? productsSelledByShop : null,
                     shopLocation,
-                    productsSelledByLocation,
-                    loyaltyCardId,
-                    productsSelledByLoyaltyCard,
-                    customerId,
-                    productsSelledByCustomer);
+                    productsSelledByLocation != -1 ? productsSelledByLocation : null,
+                    loyaltyCardId != -1 ? loyaltyCardId : null,
+                    productsSelledByLoyaltyCard != -1 ? productsSelledByLoyaltyCard : null,
+                    customerId != -1 ? customerId : null,
+                    productsSelledByCustomer != -1 ? productsSelledByCustomer : null);
 
+            // Persisting the product using selledProductService
             selledProductService.createProduct(product).await().indefinitely();
 
         } catch (Exception e) {
             LOG.error("Error processing record: {}", e.getMessage(), e);
         }
     }
+
 }
