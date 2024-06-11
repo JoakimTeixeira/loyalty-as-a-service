@@ -30,7 +30,7 @@ if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
 fi
 cd ../..
 
-cd terraform/Quarkus/Purchase
+cd terraform/Quarkus/purchase
 if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
     export pathPurchase="$(terraform state show aws_instance.purchaseQuarkus | grep public_dns | sed "s/public_dns//g" | sed "s/=//g" | sed "s/\"//g" | sed "s/ //g" | sed "s/$esc\[[0-9;]*m//g")"
 fi

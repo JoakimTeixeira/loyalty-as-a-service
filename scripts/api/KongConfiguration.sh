@@ -7,7 +7,7 @@ echo
 
 export KONG_SERVER_ADDRESS="http://${pathKongKongaCamunda}"
 export SHOP_URL="http://${pathShop}:8080/Shop"
-export PURCHASE_URL="http://${pathPurchase}:8080/Purchase"
+export PURCHASE_URL="http://${pathPurchase}:8080/purchase"
 export CUSTOMER_URL="http://${pathCustomer}:8080/Customer"
 export LOYALTYCARD_URL="http://${pathLoyaltyCard}:8080/LoyaltyCard"
 export DISCOUNTCOUPON_URL="http://${pathDiscountCoupon}:8080/DiscountCoupon"

@@ -42,7 +42,7 @@ terraform_modules=(
     "terraform/Secrets:secrets"
     "terraform/RDS:rds"
     "terraform/Kafka:kafka"
-    "terraform/Quarkus/Purchase:quarkus/purchase"
+    "terraform/Quarkus/purchase:quarkus/purchase"
     "terraform/Quarkus/customer:quarkus/customer"
     "terraform/Quarkus/shop:quarkus/shop"
     "terraform/Quarkus/loyaltycard:quarkus/loyaltycard"

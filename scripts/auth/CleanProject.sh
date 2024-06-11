@@ -39,7 +39,7 @@ clean_microservice() {
 # Clean configuration files for each microservice
 clean_microservice "microservices/customer"
 clean_microservice "microservices/loyaltycard"
-clean_microservice "microservices/Purchase"
+clean_microservice "microservices/purchase"
 clean_microservice "microservices/shop"
 
 # Remove all compilation files from Terraform

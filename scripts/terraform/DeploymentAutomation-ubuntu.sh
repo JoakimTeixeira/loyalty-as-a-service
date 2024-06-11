@@ -58,7 +58,7 @@ if [ ! -z "$IMAGE_EXISTS" ]; then
     echo "Docker image already exists locally. Skipping..."
 else
     # Dockerize Microservice -> changes the configuration of the DB connection, recompiling and packaging
-    cd microservices/Purchase/src/main/resources
+    cd microservices/purchase/src/main/resources
 
     # # Finds line starting with "quarkus.datasource.username=" and replaces anything after it with "$DB_USERNAME"
     sed -i 's|^quarkus\.datasource\.username=.*|quarkus.datasource.username='"$DB_USERNAME"'|' application.properties
@@ -90,7 +90,7 @@ else
         export TF_VAR_dockerhub_image_hash="$NEW_IMAGE_HASH"
 
         # Provision the microservice with Terraform
-        cd terraform/Quarkus/Purchase
+        cd terraform/Quarkus/purchase
         terraform init -backend-config=backend-config.hcl
         terraform apply -auto-approve
         cd ../../..

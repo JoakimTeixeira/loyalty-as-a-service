@@ -22,8 +22,8 @@ if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
 fi
 cd ../..
 
-# Quarkus Purchase
-cd terraform/Quarkus/Purchase
+# Quarkus purchase
+cd terraform/Quarkus/purchase
 if [ -d "$TERRAFORM_STATE_FOLDER" ]; then
     terraform destroy -auto-approve
 fi
