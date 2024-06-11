@@ -22,16 +22,16 @@ export DOCKERHUB_PASSWORD=''
 # Database
 export DB_USERNAME=''
 export DB_PASSWORD=''
-export DB_NAME=''
+export DB_NAME='quarkus_test_all_operations'
 
 # ================================================================================
 
 # AWS Key Pair
-export KEY_PAIR_NAME="vockey"
+export KEY_PAIR_NAME='vockey'
 
 # ================================================================================
 
 # Terraform State
-export AWS_REGION="us-east-1"
-export S3_BUCKET_NAME="iemp-project-2024-group-1-terraform-state"
-export DYNAMODB_TABLE_NAME="terraform-locks"
+export AWS_REGION='us-east-1'
+export S3_BUCKET_NAME='iemp-project-2024-group-1-terraform-state'
+export DYNAMODB_TABLE_NAME='terraform-locks'

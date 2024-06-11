@@ -73,7 +73,7 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Host">servercustomer.com</camunda:entry>
@@ -132,7 +132,7 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Host">servershop.com</camunda:entry>
@@ -296,7 +296,7 @@
   "shopId": "${ShopID}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Host">serverloyaltycard.com</camunda:entry>
@@ -348,7 +348,7 @@
         <camunda:connector>
           <camunda:inputOutput>
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000/${CustomerID}/${ShopID}</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL/${CustomerID}/${ShopID}</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Host">serverloyaltycard.com</camunda:entry>
@@ -372,7 +372,7 @@
           <camunda:inputOutput>
             <camunda:inputParameter name="payload" />
             <camunda:inputParameter name="method">GET</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000/${ShopID}</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL/${ShopID}</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Host">servershop.com</camunda:entry>
@@ -494,7 +494,7 @@
   "topicName": "${LoyaltyCardID}-${ShopName}"
 }</camunda:inputParameter>
             <camunda:inputParameter name="method">POST</camunda:inputParameter>
-            <camunda:inputParameter name="url">http://ec2-KONG_URL:8000/Consume</camunda:inputParameter>
+            <camunda:inputParameter name="url">http://ec2-KONG_URL/Consume</camunda:inputParameter>
             <camunda:inputParameter name="headers">
               <camunda:map>
                 <camunda:entry key="Host">serverpurchase.com</camunda:entry>
