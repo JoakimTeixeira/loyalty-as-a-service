@@ -46,5 +46,5 @@ To get started:
 - [x] Make the terraform state detect changes when the Quarkus docker image is created
 - [x] Remove Quarkus docker images from the local machine and Docker Hub
 - [x] Avoid creating Kong services and routes again if they already exist
-- [ ] Develop a script to update Zookeeper and Kafka configs on reboot
+- [x] Integrate an RDS database into each microservice to decrease coupling
 - [ ] Update replacement script (sed) to leverage multiple Kafka instances in the same machine

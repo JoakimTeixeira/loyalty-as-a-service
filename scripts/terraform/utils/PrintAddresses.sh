@@ -13,7 +13,10 @@ echo "${addressS3}"
 echo
 
 echo "RDS IS AVAILABLE HERE:"
-echo "${addressRDS}"
+# Loop through the addresses and print each one on a new line
+for address in "${addressesRDS[@]}"; do
+    echo "$address"
+done
 echo
 
 echo "KAFKA IS AVAILABLE HERE:"

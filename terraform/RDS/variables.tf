@@ -3,6 +3,11 @@ variable "aws_region" {
   type        = string
 }
 
+variable "db_instances" {
+  description = "The number of database instances to create"
+  type        = number
+}
+
 variable "db_username" {
   description = "The username for the database"
   type        = string

@@ -1,4 +1,5 @@
 resource "aws_db_instance" "rds_db" {
+  count                  = var.db_instances
   identifier_prefix      = "rds-database"
   engine                 = "mysql"
   allocated_storage      = 20

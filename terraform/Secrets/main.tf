@@ -9,9 +9,10 @@ resource "aws_key_pair" "key_pair" {
 }
 
 resource "aws_secretsmanager_secret" "key_pair" {
-  name                    = var.key_pair_name
-  description             = "Secret for key pair"
-  recovery_window_in_days = 0
+  name                           = var.key_pair_name
+  description                    = "Secret for key pair"
+  recovery_window_in_days        = 0
+  force_overwrite_replica_secret = true
 }
 
 resource "aws_secretsmanager_secret_version" "key_pair_version" {
