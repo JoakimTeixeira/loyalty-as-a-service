@@ -18,7 +18,7 @@ resource "aws_instance" "customerQuarkus" {
   user_data_replace_on_change = true
 
   tags = {
-    Name = "Quarkus-Customer"
+    Name = "Quarkus-customer"
   }
 }
 
