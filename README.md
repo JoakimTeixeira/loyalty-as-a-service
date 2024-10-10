@@ -48,3 +48,4 @@ To get started:
 - [x] Avoid creating Kong services and routes again if they already exist
 - [x] Integrate an RDS database into each microservice to decrease coupling
 - [ ] Update replacement script (sed) to leverage multiple Kafka instances in the same machine
+- [ ] Replace Java/Kafka modules to use Node.js with a Kafka client library
