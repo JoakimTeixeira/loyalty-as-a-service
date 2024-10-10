@@ -48,7 +48,7 @@ To get started:
 - [x] Avoid creating Kong services and routes again if they already exist
 - [x] Integrate an RDS database into each microservice to decrease coupling
 - [ ] Update replacement script (sed) to leverage multiple Kafka instances in the same machine
-- [ ] Replace Java/Kafka microservice modules to use Node.js with a Kafka client library
+- [ ] Replace Java/Kafka microservice modules to use Node.js + [KafkaJS](https://github.com/tulios/kafkajs)
 - [ ] Create new logic for BPMN diagrams in Camunda
 - [ ] Improve the database architecture
 - [ ] Implement web interface to interact with microservices
