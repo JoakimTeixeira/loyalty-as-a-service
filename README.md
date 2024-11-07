@@ -1,12 +1,12 @@
 # Loyalty-as-a-Service (LaaS)
 
-Distributed, automated and highly scalable supermarket chain management system
+Distributed, automated, and highly scalable supermarket chain management system
 
 ## Running the Project
 
 To get started:
 
-1.  Fork the repository and add your AWS and Docker credentials to the environment variables in the `Access.sh` file.
+1.  Fork the repository, clone it, and add your AWS and Docker credentials to the environment variables in the `Access.sh` file.
 
 2.  This project uses docker to containerize the Quarkus microservices, so log into your docker account with the command:
 
