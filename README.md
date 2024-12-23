@@ -48,9 +48,9 @@ To get started:
 - [x] Avoid creating Kong services and routes again if they already exist
 - [x] Integrate an RDS database into each microservice to decrease coupling
 - [ ] Update replacement script (sed) to leverage multiple Kafka instances in the same machine
-- [ ] Replace Java/Kafka microservice modules to use Node.js + [KafkaJS](https://github.com/tulios/kafkajs)
+- [ ] Replace Java/Kafka microservice modules to use NestJS + [@confluentinc/kafka-javascript](https://github.com/confluentinc/confluent-kafka-javascript)
 - [ ] Create new logic for BPMN diagrams in Camunda
 - [ ] Improve the database architecture
 - [ ] Implement web interface to interact with microservices
-- [ ] Migrate deprecated [Konga GUI](https://github.com/pantsel/konga) to [Primate GUI](https://github.com/getprimate/primate)
+- [ ] Migrate deprecated [Konga GUI](https://github.com/pantsel/konga) to [Kong Manager](https://github.com/Kong/kong-manager)
 - [ ] Document architecture
